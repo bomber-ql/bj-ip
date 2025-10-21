@@ -1,4 +1,26 @@
-document.addEventListener('DOMContentLoaded', () => {
+// 简化的脚本文件
+document.addEventListener('DOMContentLoaded', function() {
+    // 移动端菜单功能
+    const menuButton = document.getElementById('menuButton');
+    const nav = document.querySelector('nav');
+    
+    if (menuButton && nav) {
+        menuButton.addEventListener('click', function() {
+            nav.classList.toggle('active');
+            console.log('Menu button clicked');
+        });
+        
+        // 点击页面其他区域关闭菜单
+        document.addEventListener('click', function(event) {
+            if (nav.classList.contains('active') && 
+                !nav.contains(event.target) && 
+                !menuButton.contains(event.target)) {
+                nav.classList.remove('active');
+            }
+        });
+    }
+    
+    // 导航链接高亮
     const navLinks = document.querySelectorAll('nav a');
     const currentPath = window.location.pathname.split('/').pop();
 
@@ -13,9 +35,14 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             link.classList.remove('active');
         }
+        
+        // 点击导航链接后关闭菜单
+        link.addEventListener('click', function() {
+            nav.classList.remove('active');
+        });
     });
-
-document.addEventListener('DOMContentLoaded', function() {
+    
+    // 幻灯片功能
     const slides = document.querySelectorAll('.slide');
     let currentSlide = 0;
 
@@ -28,11 +55,8 @@ document.addEventListener('DOMContentLoaded', function() {
             slides[currentSlide].classList.add('active');
         }, 5000); // Change image every 5 seconds
     }
-});
-
-});
-
-document.addEventListener('DOMContentLoaded', function() {
+    
+    // 联系表单功能
     const form = document.getElementById('contact-form');
     const formStatus = document.getElementById('form-status');
 

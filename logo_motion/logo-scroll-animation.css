@@ -1,0 +1,56 @@
+/* Logo 容器样式 */
+.yiyatech-logo-scroll-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 600px;
+    width: 80%;
+    z-index: 100;
+}
+
+#yiyatech-logo-svg {
+    width: 100%;
+    height: auto;
+}
+
+/* 进度条 */
+.logo-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #0068B7, #89C997);
+    width: 0%;
+    transition: width 0.1s;
+    z-index: 1000;
+}
+
+/* 滚动提示 */
+.logo-scroll-hint {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #0068B7;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    opacity: 0.7;
+    z-index: 101;
+}
+
+.logo-scroll-hint small {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* 路径基础样式 */
+.logo-path-y-left,
+.logo-path-circle,
+.logo-path-mark,
+[class^="logo-text-"] {
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}

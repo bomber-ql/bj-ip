@@ -35,9 +35,6 @@
     </header>
 
     <main>
-        <!-- 首页锚点 -->
-        <div id="home"></div>
-        
         <!-- 1. 头图、头图文字 -->
         <section class="hero-section-slideshow">
             <div class="slideshow-container">
@@ -146,54 +143,26 @@
       
 
         <!-- 9. 一个联系表单 -->
-        <!-- 页脚 -->
-<footer>
-    <div class="container">
-        <div class="footer-content">
-            <!-- 公司信息区域 -->
-            <div class="footer-section">
-                <h3>怡亚科技</h3>
-                <p>为您提供最前沿的营销解决方案</p>
-                <p>推动品牌营销化创新</p>
-                <div class="social-links">
-                    <a href="#" aria-label="微信"><i class="fab fa-weixin"></i></a>
-                    <a href="#" aria-label="微博"><i class="fab fa-weibo"></i></a>
-                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                </div>
+        <section id="contact-form-section" class="contact-form-section">
+            <div class="container">
+                <h2>联系我们</h2>
+                <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                    <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+                    <input type="text" name="name" placeholder="您的姓名" required>
+                    <input type="email" name="email" placeholder="您的邮箱" required>
+                    <textarea name="message" placeholder="您的留言" required></textarea>
+                    <button type="submit">提交</button>
+                </form>
+                <p id="form-status"></p>
             </div>
-            
-            <!-- 快速导航 -->
-            <div class="footer-section">
-                <h4>快速导航</h4>
-                <ul class="footer-links">
-                    <li><a href="index.html">主页</a></li>
-                    <li><a href="products.html">我们的产品</a></li>
-                    <li><a href="work.html">全域营销</a></li>
-                    <li><a href="vision.html">我们的理想</a></li>
-                    <li><a href="contact.html">我们的联系方式</a></li>
-                </ul>
-            </div>
-            
+        </section>
 
-            <!-- 二维码区域 -->
-            <div class="footer-section">
-        
-                <div class="qrcode-container">
-                    <div class="qrcode-item">
-                        <img src="img/qr.jpg">
-                        <p>联系我们</p>
-                    </div>
-              
-                </div>
+        <!-- 10. 页脚 -->
+        <footer>
+            <div class="container">
+                <p>&copy; 2025 怡亚科技  保留所有权利.</p>
             </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; 2025 怡亚科技 保留所有权利
-        </div>
-    </div>
-</footer>
+        </footer>
     </main>
 
     <script src="script.js"></script>
