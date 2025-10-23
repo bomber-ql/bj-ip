@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>联系我们 - 怡亚科技</title>
-    <link rel="stylesheet" href="subpage.css">
+        <link rel="stylesheet" href="subpage.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 </head>
@@ -21,48 +21,57 @@
                 <div class="dot"></div>
                 <div class="dot"></div>
             </div>
-            <nav>
-    <ul>
-        <li><a href="index.html">主页</a></li>
-        <li><a href="vision.html">关于我们</a></li>
-        <li><a href="contact.html">联系我们</a></li>
-    </ul>
-</nav>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">主页</a></li>
+                    <li><a href="vision.html">关于我们</a></li>
+                    <li><a href="contact.html">联系我们</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <main class="subpage-content">
-        <div class="content">
-            <h2>联系我们</h2>
-            <p>我们期待与您的合作，共同创造卓越的品牌体验</p>
-            
-            <!-- 顶部logo -->
-            <img src="img/contact/building-7879891_1280.jpg" alt="怡亚科技 Logo" class="top-logo">
-            
-            <!-- 下方两列内容 -->
-            <div class="contact-content">
-                <!-- 左侧：联系信息 -->
-                <div class="office-info">
-                    <h3>北京总部</h3>
-                    <p><strong>地址：</strong>北京市城市副中心宋庄小堡东区2号院</p>
-                    <p><strong>电话：</strong>18510501896</p>
-                    <p><strong>邮箱：</strong>yiyatech@bj-ip.com</p>
-                </div>
-                
-                <!-- 右侧：二维码区域 -->
-                <div class="office-QR">
-                    <div class="qr-images">
-                        <img src="img/qr.jpg" alt="微信二维码">
+    <main>
+        <!-- 英雄区域 - 图片背景和文字 -->
+        <section class="hero-section">
+            <div class="hero-bg"></div>
+            <div class="hero-content">
+                <h1>联系我们</h1>
+                <p>我们期待与您的合作，共同创造卓越的品牌体验</p>
+            </div>
+        </section>
+
+        <!-- 联系信息区域 -->
+        <section class="contact-section">
+            <div class="contact-container">
+                <div class="contact-grid">
+                    <!-- 左侧：联系信息 -->
+                    <div class="office-info">
+                        <h2>怡亚科技</h2>
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <p><strong>地址：</strong>北京市城市副中心宋庄小堡东区2号院</p>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-phone"></i>
+                            <p><strong>电话：</strong>18510501896</p>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <p><strong>邮箱：</strong>yiyatech@bj-ip.com</p>
+                        </div>
                     </div>
-                    <p>扫描二维码联系我们</p>
+                    
+            
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
     </main>
 
     <!-- 页脚 -->
     <footer>
-        <div class="container">
+        <div class="footer-container">
             <div class="footer-content">
                 <!-- 公司信息区域 -->
                 <div class="footer-section">
@@ -70,13 +79,13 @@
                     <p>为您提供最前沿的营销解决方案</p>
                     <p>推动品牌营销化创新</p>
                     <div class="social-links">
-                        <a href="https://您的微信公众号链接" target="_blank" aria-label="微信">
+                        <a href="#" target="_blank" aria-label="微信">
                             <i class="fab fa-weixin"></i>
                         </a>
-                        <a href="https://weibo.com/您的微博账号" target="_blank" aria-label="微博">
+                        <a href="#" target="_blank" aria-label="微博">
                             <i class="fab fa-weibo"></i>
                         </a>
-                        <a href="https://douyin.com/您的抖音账号" target="_blank" aria-label="抖音">
+                        <a href="#" target="_blank" aria-label="抖音">
                             <i class="fab fa-tiktok"></i>
                         </a>
                     </div> 
@@ -108,8 +117,7 @@
             </div>
         </div>
     </footer>
-
     <script src="script.js"></script>
-    <script src="logo_motion/logo-scroll-animation.js"></script>
+    <script src="logo_motion/logo-scroll-animation.js"></script>    
 </body>
 </html>
