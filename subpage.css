@@ -6,7 +6,6 @@
     --accent-color: #929292;
     --hover-color: #aaa;
     --card-bg: rgba(255, 255, 255, 0.1);
-    --footer-bg: #000000;
     
     /* 字体大小 */
     --font-xs: 0.9rem;
@@ -17,13 +16,14 @@
     --font-xxl: 2rem;
     --font-xxxl: 2.5rem;
     
-    /* 间距 */
-    --space-xs: 10px;
-    --space-sm: 15px;
-    --space-md: 20px;
-    --space-lg: 30px;
-    --space-xl: 40px;
-    --space-xxl: 50px;
+     /* 间距 */
+  --space-xs: 10px;
+  --space-sm: 15px;
+  --space-md: 20px;
+  --space-lg: 30px;
+  --space-xl: 40px;
+  --space-xxl: 50px;
+  --space-section: 80px;
 }
 
 /* ===== 重置与基础样式 ===== */
@@ -155,7 +155,6 @@ main {
 
 /* ===== 业务咨询区域样式 - 修正版 ===== */
 .business-inquiry {
-   
     padding: 10px;
     border-radius: 22px;
     height: fit-content;
@@ -264,119 +263,6 @@ main {
 .qr-section p {
     font-size: 1.1rem;
     color: #e0e0e0;
-}
-
-/* ===== 页脚样式 ===== */
-footer {
-    background-color: var(--footer-bg);
-    color: #ecf0f1;
-    padding: 60px 0 20px;
-}
-
-.footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.footer-content {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 40px;
-    margin-bottom: 40px;
-}
-
-.footer-section h3 {
-    color: #ffffff;
-    margin-bottom: 20px;
-    font-size: 1.5rem;
-}
-
-.footer-section h4 {
-    color: #ffffff;
-    margin-bottom: 15px;
-    font-size: 1.2rem;
-}
-
-.footer-section p {
-    line-height: 1.6;
-    margin-bottom: 15px;
-    color: #b0b0b0;
-}
-
-.social-links {
-    display: flex;
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.social-links a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background-color: #34495e;
-    border-radius: 50%;
-    color: #ecf0f1;
-    transition: all 0.3s ease;
-}
-
-.social-links a:hover {
-    background-color: var(--accent-color);
-    transform: translateY(-3px);
-}
-
-.footer-links {
-    list-style: none;
-}
-
-.footer-links li {
-    margin-bottom: 12px;
-}
-
-.footer-links a {
-    color: #bdc3c7;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-links a:hover {
-    color: var(--accent-color);
-}
-
-.qrcode-container {
-    display: flex;
-    justify-content: center;
-}
-
-.qrcode-item {
-    text-align: center;
-}
-
-.qrcode-item img {
-    width: 100px;
-    height: 100px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-}
-
-.qrcode-item p {
-    font-size: 0.9rem;
-    margin: 0;
-    color: #b0b0b0;
-}
-
-.footer-bottom {
-    border-top: 1px solid #34495e;
-    padding-top: 20px;
-    text-align: center;
-}
-
-.footer-bottom p {
-    margin: 0;
-    color: #95a5a6;
-    font-size: 0.9rem;
 }
 
 /* ===== 头部与导航 ===== */
@@ -577,13 +463,6 @@ nav ul li a.active::after {
         padding: 12px 20px;
         font-size: 1rem;
         grid-column: 1; /* 在移动端，按钮只占一列 */
-    }
-
-
-    /* 页脚 */
-    .footer-content {
-        grid-template-columns: 1fr;
-        gap: 30px;
     }
 }
 

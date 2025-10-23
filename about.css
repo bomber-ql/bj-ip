@@ -1,411 +1,338 @@
- /* ===== CSS变量定义 ===== */
-        :root {
-          /* 颜色变量 */
-          --primary-bg: #000;
-          --secondary-bg: #2c2c2c;
-          --text-color: #fff;
-          --accent-color: #929292;
-          --hover-color: #aaa;
-          --card-bg: #ffffff;
-          --footer-bg: #000000;
-          
-          /* 字体大小 */
-          --font-xs: 0.9rem;
-          --font-sm: 1rem;
-          --font-md: 1.1rem;
-          --font-lg: 1.2rem;
-          --font-xl: 1.5rem;
-          --font-xxl: 2rem;
-          --font-xxxl: 2.5rem;
-          --font-hero: 3rem;
-          
-          /* 间距 */
-          --space-xs: 10px;
-          --space-sm: 15px;
-          --space-md: 20px;
-          --space-lg: 30px;
-          --space-xl: 40px;
-          --space-xxl: 50px;
-          --space-section: 80px;
-          
-          /* 断点 */
-          --mobile: 768px;
-          --small-mobile: 480px;
-          
-          /* 边框圆角 */
-          --radius-sm: 5px;
-          --radius-md: 10px;
-          --radius-lg: 15px;
-          
-          /* 阴影 */
-          --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.6);
-          --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.1);
-          --shadow-lg: 0 15px 40px rgba(0, 0, 0, 0.15);
-        }
+/* ===== CSS变量定义 ===== */
+:root {
+  /* 颜色变量 */
+  --primary-bg: #000;
+  --secondary-bg: #2c2c2c;
+  --text-color: #fff;
+  --accent-color: #929292;
+  --hover-color: #aaa;
+  --card-bg: #ffffff;
+  --footer-bg: #000000;
+  
+  /* 字体大小 */
+  --font-xs: 0.9rem;
+  --font-sm: 1rem;
+  --font-md: 1.1rem;
+  --font-lg: 1.2rem;
+  --font-xl: 1.5rem;
+  --font-xxl: 2rem;
+  --font-xxxl: 2.5rem;
+  --font-hero: 3rem;
+  
+  /* 间距 */
+  --space-xs: 10px;
+  --space-sm: 15px;
+  --space-md: 20px;
+  --space-lg: 30px;
+  --space-xl: 40px;
+  --space-xxl: 50px;
+  --space-section: 80px;
+  /* 断点 */
+  --mobile: 768px;
+  --small-mobile: 480px;
+  
+  /* 边框圆角 */
+  --radius-sm: 5px;
+  --radius-md: 10px;
+  --radius-lg: 15px;
+  
+  /* 阴影 */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.6);
+  --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
 
-        /* ===== 重置与基础样式 ===== */
-        * {
-          box-sizing: border-box;
-        }
+/* ===== 重置与基础样式 ===== */
+* {
+  box-sizing: border-box;
+}
 
-        body, html {
-          margin: 0;
-          padding: 0;
-          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-          scroll-behavior: smooth;
-          background-color: var(--primary-bg);
-          color: var(--text-color);
-        }
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  scroll-behavior: smooth;
+  background-color: var(--primary-bg);
+  color: var(--text-color);
+}
 
-        .container {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 0 var(--space-md);
-        }
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
 
- 
+/* ===== 主要内容区域 ===== */
+main {
+    margin-top: 70px;
+    padding-bottom: 60px;
+    background: #000000;
+}
 
-        /* ===== 主要内容区域 ===== */
-        main {
-            margin-top: 70px;
-            padding-bottom: 60px;
-            background: #000000;
-        }
+/* 主要英雄区域 - 修改后的样式 */
+.hero-section {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    overflow: hidden;
+    padding-top: 200px;
+}
 
-        /* 主要英雄区域 - 修改后的样式 */
-        .hero-section {
-            position: relative;
-            height: 100vh;
-            min-height: 600px;
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-            overflow: hidden;
-            padding-top: 200px;
-        }
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 100%);
+    z-index: 1;
+}
 
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 100%);
-            z-index: 1;
-        }
+.hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
 
-        .hero-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
-        .hero-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+.hero-section .container {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 900px;
+    padding: 0 20px;
+    color: #fff;
+    margin-top: 0;
+}
 
-        .hero-section .container {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            max-width: 900px;
-            padding: 0 20px;
-            color: #fff;
-            margin-top: 0;
-        }
+.hero-section .container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    animation: fadeInUp 1s ease-out;
+}
 
-        .hero-section .container h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-            animation: fadeInUp 1s ease-out;
-        }
+.hero-section .container p {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    animation: fadeInUp 1s ease-out 0.2s both;
+}
 
-        .hero-section .container p {
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-            animation: fadeInUp 1s ease-out 0.2s both;
-        }
+.hero-section .container p:last-child {
+    margin-bottom: 0;
+    animation: fadeInUp 1s ease-out 0.4s both;
+}
 
-        .hero-section .container p:last-child {
-            margin-bottom: 0;
-            animation: fadeInUp 1s ease-out 0.4s both;
-        }
+/* 动画效果 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-        /* 动画效果 */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+.team-section {
+    padding: 60px 0;
+    background: #000000;
+}
 
-        /* ===== 团队介绍区域 ===== */
-        .team-section {
-            padding: 60px 0;
-            background: #000000;
-        }
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
 
-        .section-title {
-            text-align: center;
-            margin-bottom: 40px;
-        }
+.section-title h2 {
+    font-size: 2rem;
+    color: #ffffff;
+    margin-bottom: 15px;
+}
 
-        .section-title h2 {
-            font-size: 2rem;
-            color: #ffffff;
-            margin-bottom: 15px;
-        }
+.section-title p {
+    font-size: 1rem;
+    color: #b0b0b0;
+    max-width: 700px;
+    margin: 0 auto;
+}
 
-        .section-title p {
-            font-size: 1rem;
-            color: #b0b0b0;
-            max-width: 700px;
-            margin: 0 auto;
-        }
+/* PC端团队介绍布局 */
+@media (min-width: 769px) {
+    .team-intro {
+        flex-direction: row;
+        align-items: center;
+    }
+    
+    .team-intro-content,
+    .team-intro-image {
+        flex: 1;
+    }
+}
 
-        .team-intro {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-            margin-bottom: 50px;
-        }
+.team-intro {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-bottom: 50px;
+}
 
-        .team-intro-content {
-            flex: 1;
-        }
+.team-intro-content {
+    flex: 1;
+}
 
-        .team-intro-image {
-            flex: 1;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
+.team-intro-image {
+    flex: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
 
-        .team-intro-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
+.team-intro-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
 
-        .team-intro-content h3 {
-            font-size: 1.5rem;
-            color: #ffffff;
-            margin-bottom: 15px;
-        }
+.team-intro-content h3 {
+    font-size: 1.5rem;
+    color: #ffffff;
+    margin-bottom: 15px;
+}
 
-        .team-intro-content p {
-            color: #b0b0b0;
-            line-height: 1.7;
-            margin-bottom: 15px;
-        }
+.team-intro-content p {
+    color: #b0b0b0;
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
 
-        .team-stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            text-align: center;
-            margin-top: 30px;
-        }
+/* 团队统计数据 - 修正版 */
+.team-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* PC端显示4列 */
+    gap: 20px;
+    text-align: center;
+    margin-top: 30px;
+}
 
-        .stat-item {
-            padding: 15px;
-        }
+.stat-item {
+    padding: 15px;
+}
 
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #007aff;
-            margin-bottom: 5px;
-        }
+.stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #007aff;
+    margin-bottom: 5px;
+}
 
-        .stat-label {
-            color: #b0b0b0;
-            font-size: 0.9rem;
-        }
+.stat-label {
+    color: #b0b0b0;
+    font-size: 0.9rem;
+}
 
-        /* ===== 愿景使命部分 ===== */
-        .vision-section {
-            padding: 60px 0;
-            background: linear-gradient(135deg, #002247 0%, #000000 100%);
-            color: white;
-        }
+/* ===== 愿景使命部分 ===== */
+.vision-section {
+    padding: 60px 0;
+    background: linear-gradient(135deg, #002247 0%, #000000 100%);
+    color: white;
+}
 
-        .vision-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
+.vision-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
 
-        .vision-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 30px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+.vision-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 30px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
 
-        .vision-icon {
-            font-size: 2.5rem;
-            color: #007aff;
-            margin-bottom: 15px;
-        }
+.vision-icon {
+    font-size: 2.5rem;
+    color: #007aff;
+    margin-bottom: 15px;
+}
 
-        .vision-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            color: #ffffff;
-        }
+.vision-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
 
-        .vision-card p {
-            color: #e0e0e0;
-            line-height: 1.7;
-            margin-bottom: 15px;
-        }
+.vision-card p {
+    color: #e0e0e0;
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
 
-        /* ===== 核心价值观 ===== */
-        .values-section {
-            padding: 60px 0;
-            background: #262626;
-        }
+/* ===== 核心价值观 ===== */
+.values-section {
+    padding: 60px 0;
+    background: #262626;
+}
 
-        .values-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
 
-        .value-card {
-            text-align: center;
-            padding: 25px 15px;
-            background: #0a0a0a;
-            border-radius: 12px;
-            transition: transform 0.3s ease;
-        }
+.value-card {
+    text-align: center;
+    padding: 25px 15px;
+    background: #0a0a0a;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
 
-        .value-card:hover {
-            transform: translateY(-5px);
-            background: #111111;
-        }
+.value-card:hover {
+    transform: translateY(-5px);
+    background: #111111;
+}
 
-        .value-icon {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 15px;
-            background: #3c3c3c;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-        }
+.value-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 15px;
+    background: #3c3c3c;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+}
 
-        .value-card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-            color: #ffffff;
-        }
+.value-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
 
-        .value-card p {
-            color: #b0b0b0;
-            font-size: 0.85rem;
-            line-height: 1.6;
-        }
+.value-card p {
+    color: #b0b0b0;
+    font-size: 0.85rem;
+    line-height: 1.6;
+}
 
-        /* ===== 页脚样式 ===== */
-        footer {
-            background: #111;
-            color: #fff;
-            padding: 50px 0 20px;
-        }
-
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-
-        .footer-section h3, .footer-section h4 {
-            margin-bottom: 15px;
-            color: #fff;
-        }
-
-        .footer-section p {
-            color: #b0b0b0;
-            margin-bottom: 10px;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 8px;
-        }
-
-        .footer-links a {
-            color: #b0b0b0;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: #007aff;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .social-links a {
-            color: #b0b0b0;
-            font-size: 1.2rem;
-            transition: color 0.3s;
-        }
-
-        .social-links a:hover {
-            color: #007aff;
-        }
-
-        .qrcode-container {
-            display: flex;
-            justify-content: center;
-        }
-
-        .qrcode-item {
-            text-align: center;
-        }
-
-        .qrcode-item img {
-            width: 120px;
-            height: 120px;
-            margin-bottom: 10px;
-        }
-
-        .qrcode-item p {
-            color: #b0b0b0;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #333;
-            color: #b0b0b0;
-        }
 /* ===== 头部与导航 ===== */
 header {
   position: fixed;
@@ -501,8 +428,9 @@ nav ul li a.active::after {
   transition: all 0.3s ease;
 }
 
-/* 移动端导航样式 - 统一版本 */
+/* ===== 响应式设计 ===== */
 @media (max-width: 768px) {
+  /* 导航菜单 */
   .header-container {
     padding: 15px 20px;
   }
@@ -540,4 +468,44 @@ nav ul li a.active::after {
     font-size: 18px;
     padding: 15px 0;
   }
-       
+  
+  /* 英雄区域 */
+  .hero-section {
+    height: 60vh;
+    min-height: 400px;
+  }
+  
+  .hero-content h1 {
+    font-size: 2.2rem;
+  }
+  
+  .hero-content p {
+    font-size: 1rem;
+  }
+
+  /* 团队统计数据在平板端显示为2列 */
+  .team-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  /* 团队统计数据在手机端显示为1列 */
+  .team-stats {
+    grid-template-columns: 1fr;
+  }
+  
+  /* 其他现有的小屏幕样式保持不变 */
+  .hero-section {
+    height: 50vh;
+    min-height: 350px;
+  }
+  
+  .hero-content h1 {
+    font-size: 1.8rem;
+  }
+  
+  .hero-content p {
+    font-size: 0.9rem;
+  }
+}
