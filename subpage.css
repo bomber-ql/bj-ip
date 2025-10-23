@@ -1,3 +1,5 @@
+/* ===== 联系页面专用样式 ===== */
+
 /* 优化后的CSS文件 */
 body, html {
     margin: 0;
@@ -5,7 +7,7 @@ body, html {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     scroll-behavior: smooth;
     background-color: #ffffff;
-    color: #333; /* 改为深色文字 */
+    color: #333;
 }
 
 header {
@@ -50,7 +52,29 @@ nav ul {
     justify-content: center;
 }
 
-/* 菜单按钮样式 */
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 20px 0;
+    display: block;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #aaa;
+}
+
+nav ul li a.active {
+    color: #a9a9a9;
+    font-weight: bold;
+}
+
+/* 菜单按钮样式 - 统一为标准样式 */
 .menu-button {
     display: none;
     flex-direction: column;
@@ -67,15 +91,152 @@ nav ul {
 }
 
 .menu-button .dot {
-    width: 4px;
-    height: 4px;
-    background-color: white;
-    border-radius: 50%;
-    margin: 1px 0;
+  width: 4px;
+  height: 4px;
+  background-color: white;
+  border-radius: 50%;
+  margin: 1px 0;
 }
 
-/* 响应式设计 - 手机端 */
-@media screen and (max-width: 768px) {
+/* 子页面内容区域 */
+.subpage-content {
+    padding-top: 100px;
+    padding-left: 20px;
+    padding-right: 20px;
+    max-width: 980px;
+    margin: 0 auto;
+    min-height: calc(100vh - 100px);
+    color: #333;
+}
+
+.subpage-content .content {
+    text-align: left;
+}
+
+.subpage-content h2 {
+    font-size: 2.5rem;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.subpage-content p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+/* 联系我们页面特定样式 */
+.full-width-map {
+    width: 100%;
+    height: 300px;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.map-container {
+    background: #f8f9fa;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.map-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #e0e0e0 25%, transparent 25%), 
+                linear-gradient(-45deg, #e0e0e0 25%, transparent 25%), 
+                linear-gradient(45deg, transparent 75%, #e0e0e0 75%), 
+                linear-gradient(-45deg, transparent 75%, #e0e0e0 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 18px;
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+.office-info {
+    background: #ffffff;
+    padding: 25px;
+}
+
+.office-info h3 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+    border-bottom: 2px solid #007aff;
+    padding-bottom: 10px;
+}
+
+.office-info p {
+    margin: 12px 0;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* 二维码区域样式 */
+.office-QR {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+}
+
+.qr-images {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+}
+
+.office-QR img {
+    width: 80px;
+    height: 80px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+    background: white;
+}
+
+.office-QR p {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #333;
+    font-weight: bold;
+}
+
+/* 右侧内容样式 */
+.right-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 顶部logo样式 */
+.top-logo {
+    width: 1000px;
+    height: auto;
+    margin: 0 auto 30px auto;
+    display: block;
+}
+
+/* 响应式设计 - 手机端 - 统一为标准样式 */
+@media (max-width: 768px) {
     .header-container {
         flex-direction: row;
         justify-content: space-between;
@@ -126,207 +287,46 @@ nav ul {
         display: block;
         font-weight: 500;
     }
+
+    .full-width-map {
+        height: 300px;
+        margin-bottom: 30px;
+    }
+    
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .office-QR img {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .top-logo {
+        width: 150px;
+    }
 }
 
-nav ul li {
-    margin: 0 15px;
+@media (max-width: 480px) {
+    .full-width-map {
+        height: 250px;
+        margin-bottom: 20px;
+    }
+    
+    .contact-content {
+        margin-top: 20px;
+    }
+    
+    .office-QR img {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .top-logo {
+        width: 120px;
+    }
 }
-
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 14px;
-    padding: 20px 0;
-    display: block;
-    transition: color 0.3s;
-}
-
-nav ul li a:hover {
-    color: #aaa;
-}
-
-nav ul li a.active {
-    color: #a9a9a9;
-    font-weight: bold;
-}
-
-/* 子页面内容区域 */
-.subpage-content {
-    padding-top: 100px;
-    padding-left: 20px;
-    padding-right: 20px;
-    max-width: 980px;
-    margin: 0 auto;
-    min-height: calc(100vh - 100px);
-    color: #333;
-}
-
-.subpage-content .content {
-    text-align: left;
-}
-
-.subpage-content h2 {
-    font-size: 2.5rem;
-    border-bottom: 2px solid #333;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-}
-
-.subpage-content p {
-    font-size: 1.2rem;
-    line-height: 1.6;
-}
-
-        /* 联系我们页面特定样式 */
-        .full-width-map {
-            width: 100%;
-            height: 300px;
-            margin-bottom: 40px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        .map-container {
-            background: #f8f9fa;
-            width: 100%;
-            height: 100%;
-            position: relative;
-        }
-
-        .map-placeholder {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, #e0e0e0 25%, transparent 25%), 
-                        linear-gradient(-45deg, #e0e0e0 25%, transparent 25%), 
-                        linear-gradient(45deg, transparent 75%, #e0e0e0 75%), 
-                        linear-gradient(-45deg, transparent 75%, #e0e0e0 75%);
-            background-size: 20px 20px;
-            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #666;
-            font-size: 18px;
-        }
-
-        .contact-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-        }
-
-        .office-info {
-            background: #ffffff;
-            padding: 25px;
-        }
-
-        .office-info h3 {
-            color: #333;
-            margin-bottom: 15px;
-            font-size: 1.4rem;
-            border-bottom: 2px solid #007aff;
-            padding-bottom: 10px;
-        }
-
-        .office-info p {
-            margin: 12px 0;
-            color: #555;
-            line-height: 1.6;
-        }
-
-        /* 二维码区域样式 */
-        .office-QR {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            margin-top: 20px;
-            padding: 20px;
-            background: #ffffff;
-            border-radius: 10px;
-        }
-
-        .qr-images {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            gap: 20px;
-            justify-content: center;
-            width: 100%;
-        }
-
-        .office-QR img {
-            width: 80px;
-            height: 80px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 5px;
-            background: white;
-        }
-
-        .office-QR p {
-            margin: 0;
-            font-size: 1.1rem;
-            color: #333;
-            font-weight: bold;
-        }
-            /* 右侧内容样式 */
-        .right-content {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        /* 顶部logo样式 */
-        .top-logo {
-            width: 1000px;
-            height: auto;
-            margin: 0 auto 30px auto;
-            display: block;
-        }
-
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            .full-width-map {
-                height: 300px;
-                margin-bottom: 30px;
-            }
-            
-            .contact-content {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            
-            .office-QR img {
-                width: 100px;
-                height: 100px;
-            }
-            
-            .top-logo {
-                width: 150px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .full-width-map {
-                height: 250px;
-                margin-bottom: 20px;
-            }
-            
-            .contact-content {
-                margin-top: 20px;
-            }
-            
-            .office-QR img {
-                width: 80px;
-                height: 80px;
-            }
-            
-            .top-logo {
-                width: 120px;
-            }
-        }
 
 /* 页脚样式 */
 footer {
