@@ -6,6 +6,9 @@
     <title>怡亚科技</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+        
 </head>
 <body>
     <header>
@@ -25,10 +28,8 @@
             <nav>
                 <ul>
                     <li><a href="index.html">主页</a></li>
-                    <li><a href="products.html">我们的产品</a></li>
-                    <li><a href="work.html">全域营销</a></li>
-                    <li><a href="vision.html">我们的理想</a></li>
-                    <li><a href="contact.html">我们的联系方式</a></li>
+                    <li><a href="vision.html">关于我们</a></li>
+                    <li><a href="contact.html">联系我们</a></li>
                 </ul>
             </nav>
         </div>
@@ -48,6 +49,29 @@
                 <div class="slide slide-5"></div>
                 <div class="slide slide-6"></div>
                 <div class="slide slide-7"></div>
+                
+                <!-- 左右切换按钮 -->
+                <button class="slideshow-btn slideshow-prev" aria-label="上一张">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                </button>
+                <button class="slideshow-btn slideshow-next" aria-label="下一张">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </button>
+                
+                <!-- 轮播图指示器 -->
+                <div class="slideshow-indicators">
+                    <div class="indicator active" data-slide="0"></div>
+                    <div class="indicator" data-slide="1"></div>
+                    <div class="indicator" data-slide="2"></div>
+                    <div class="indicator" data-slide="3"></div>
+                    <div class="indicator" data-slide="4"></div>
+                    <div class="indicator" data-slide="5"></div>
+                    <div class="indicator" data-slide="6"></div>
+                </div>
             </div>
           
             <div class="container">
@@ -56,6 +80,7 @@
             </div>
         </section>
 
+        <!-- 其他部分保持不变 -->
         <!-- 2. 一段纯文字 -->
         <section class="text-section">
             <div class="container">
@@ -67,7 +92,7 @@
         <!-- 3. 一个由两列多张可点击的图片构成的块 -->
         <section class="image-grid-section">
             <div class="container">
-                <h2>全域营销案例</h2>
+
             </div>
             <div class="image-grid">
                 <a href="work.html"><img src="img/work/100.jpeg" alt="作品1"></a>
@@ -85,24 +110,135 @@
             </div>
         </section>
 
+        <section class="subpage-content">
+            <div class="stats-section">
+                <div class="stat-card">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-text">成功内容项目</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">85%</div>
+                    <div class="stat-text">客户续约率</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">3M+</div>
+                    <div class="stat-text">月均内容曝光</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-text">内容质量满意度</div>
+                </div>
+            </div>
+        <div class="content">
+            <h2>内容生成</h2>
+            <p>通过战略性内容创作，为品牌建立强大的数字资产，实现持续的用户互动和业务增长</p>
+            
+            <!-- 内容生成流程 -->
+            <div class="content-process">
+                <div class="process-card">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>策略规划</h3>
+                    <p>基于品牌定位和目标受众，制定全面的内容策略，确保每一份内容都有明确的商业目标。</p>
+                </div>
+                <div class="process-card">
+                    <i class="fas fa-pen-fancy"></i>
+                    <h3>创意开发</h3>
+                    <p>专业创意团队打造独特品牌故事，结合行业洞察和用户需求，创造引人入胜的内容体验。</p>
+                </div>
+                <div class="process-card">
+                    <i class="fas fa-cogs"></i>
+                    <h3>多渠道生产</h3>
+                    <p>适配各平台特性的内容创作，从社交媒体到官方网站，确保品牌信息的一致性和影响力。</p>
+                </div>
+            </div>
+            </section>
+
+ <!-- 产品内容块 --> 
+    <section class="content-types">
+        <div class="container">
+            <h2>全方位内容解决方案</h2>
+        </div>
+        <div class="type-grid">
+            <!-- 第一个内容项 - 已修改 -->
+            <div class="type-item">
+                <a href="brand-story.html" target="_blank">
+                    <img src="img/type-grid.jpg" alt="品牌故事">
+                    <div class="image-overlay">
+                        <h3 class="image-title">品牌策略</h3>
+                        <p class="image-description">深度品牌内容，建立情感连接。通过精心打造的品牌叙事，帮助您的品牌与目标受众建立深厚的情感纽带，提升品牌忠诚度和影响力。</p>
+                    </div>
+                </a>
+                <div class="type-content">
+                    <p class="service-tags">品牌命名 / 品牌定位 / 品牌愿景 / 品牌形象 / 品牌IP设计 / 包装设计 / LOGO设计 /  VI设计 / 文创设计</p>
+                </div>
+            </div>
+            
+           <!-- 第二个内容项 - 数据洞察 -->
+            <div class="type-item">
+                <a href="data-insights.html" target="_blank">
+                    <img src="img/type-item.jpg" alt="数据洞察">
+                    <div class="image-overlay">
+                        <h3 class="image-title">数据洞察</h3>
+                        <p class="image-description">基于数据分析的内容优化。通过深入的数据分析和用户行为洞察，优化内容策略，确保每一篇内容都能精准触达目标受众。</p>
+                    </div>
+                </a>
+                <div class="type-content">
+                    <p class="service-tags">数据监测/用户画像/行为分析/效果评估/A/B测试/ROI分析/竞品分析/趋势预测</p>
+                </div>
+            </div>
+            
+            <!-- 第三个内容项 - 社群内容 -->
+            <div class="type-item">
+                <a href="community-content.html" target="_blank">
+                    <img src="img/type-content.jpg" alt="品牌活动">
+                    <div class="image-overlay">
+                        <h3 class="image-title">品牌活动</h3>
+                        <p class="image-description">互动性强的高参与度内容。创建能够激发用户互动和分享的社群内容，建立品牌与用户之间的深度连接，形成品牌社群。</p>
+                    </div>
+                </a>
+                <div class="type-content">
+                    <p class="service-tags">社群运营/内容策划/KOL合作/用户互动/活动策划/口碑营销/社群管理/用户增长/活动搭建/p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+       
+            // 添加点击效果
+            const typeItems = document.querySelectorAll('.type-item');
+            
+            typeItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    // 如果不是点击链接，则添加点击效果
+                    if (e.target.tagName !== 'A' && !e.target.closest('a')) {
+                        this.style.transform = 'scale(0.98)';
+                        setTimeout(() => {
+                            this.style.transform = '';
+                        }, 200);
+                    }
+                });
+            });
+        
+    </script>
+
         <!-- 4. 几个框,框里有图片和文字 -->
         <section class="feature-boxes-section">
             <div class="container">
                 <div class="feature-box">
                     <img src="img/hero_img/02.jpg" alt="特性1">
                     <h3>营销专家团队</h3>
-                    <p>“技术懂营销、营销懂技术”<br>我们的团队既懂技术落地，又懂用户喜好，帮你真正吸引客户。</p>
+                    <p>"技术懂营销、营销懂技术"<br>我们的团队既懂技术落地，又懂用户喜好，帮你真正吸引客户。</p>
                 </div>
                 <div class="feature-box">
                     <img src="img/hero_img/01.jpg" alt="特性2">
                     <h3>全链路服务</h3>
-                    <p>“服务通流程、流程优服务”<br>全链路服务覆盖需求，灵活调整细节，帮你高效推进营销动作。</p>
-</p>
+                    <p>"服务通流程、流程优服务"<br>全链路服务覆盖需求，灵活调整细节，帮你高效推进营销动作。</p>
                 </div>
                 <div class="feature-box">
                     <img src="img/hero_img/03.jpg" alt="特性3">
                     <h3>行业资源整合</h3>
-                    <p>“资源能联动、联动强资源”<br>行业资源全覆盖，精准匹配营销动作，帮你实现营销传播破圈。</p>
+                    <p>"资源能联动、联动强资源"<br>行业资源全覆盖，精准匹配营销动作，帮你实现营销传播破圈。</p>
                 </div>
             </div>
         </section>
@@ -142,60 +278,58 @@
             </div>
         </section> </section>
 
-        <!-- 8. 一段纯文字 -->
-      
-
-        <!-- 9. 一个联系表单 -->
         <!-- 页脚 -->
-<footer>
-    <div class="container">
-        <div class="footer-content">
-            <!-- 公司信息区域 -->
-            <div class="footer-section">
-                <h3>怡亚科技</h3>
-                <p>为您提供最前沿的营销解决方案</p>
-                <p>推动品牌营销化创新</p>
-                <div class="social-links">
-                    <a href="#" aria-label="微信"><i class="fab fa-weixin"></i></a>
-                    <a href="#" aria-label="微博"><i class="fab fa-weibo"></i></a>
-                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                </div>
-            </div>
-            
-            <!-- 快速导航 -->
-            <div class="footer-section">
-                <h4>快速导航</h4>
-                <ul class="footer-links">
-                    <li><a href="index.html">主页</a></li>
-                    <li><a href="products.html">我们的产品</a></li>
-                    <li><a href="work.html">全域营销</a></li>
-                    <li><a href="vision.html">我们的理想</a></li>
-                    <li><a href="contact.html">我们的联系方式</a></li>
-                </ul>
-            </div>
-            
-
-            <!-- 二维码区域 -->
-            <div class="footer-section">
-        
-                <div class="qrcode-container">
-                    <div class="qrcode-item">
-                        <img src="img/qr.jpg">
-                        <p>联系我们</p>
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <!-- 公司信息区域 -->
+                    <div class="footer-section">
+                        <h3>怡亚科技</h3>
+                        <p>为您提供最前沿的营销解决方案</p>
+                        <p>推动品牌营销化创新</p>
+                        <div class="social-links">
+                            <a href="https://您的微信公众号链接" target="_blank" aria-label="微信">
+                                <i class="fab fa-weixin"></i>
+                            </a>
+                            <a href="https://weibo.com/您的微博账号" target="_blank" aria-label="微博">
+                                <i class="fab fa-weibo"></i>
+                            </a>
+                            <a href="https://douyin.com/您的抖音账号" target="_blank" aria-label="抖音">
+                                <i class="fab fa-tiktok"></i>
+                            </a>
+                        </div> 
                     </div>
-              
+                    
+                    <!-- 快速导航 -->
+                    <div class="footer-section">
+                        <h4>快速导航</h4>
+                        <ul class="footer-links">
+                    <li><a href="index.html">主页</a></li>
+                    <li><a href="vision.html">关于我们</a></li>
+                    <li><a href="contact.html">联系我们</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- 二维码区域 -->
+                    <div class="footer-section">
+                        <div class="qrcode-container">
+                            <div class="qrcode-item">
+                                <img src="img/qr.jpg">
+                                <p>联系我们</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <p>&copy; 2025 怡亚科技 保留所有权利</p>
                 </div>
             </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; 2025 怡亚科技 保留所有权利
-        </div>
-    </div>
-</footer>
+        </footer>
     </main>
 
+   
+    
     <script src="script.js"></script>
     <script src="logo_motion/logo-scroll-animation.js"></script>
 </body>

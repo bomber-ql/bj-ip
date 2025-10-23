@@ -1,10 +1,93 @@
-(function() {
+
+        // 轮播图功能
+         document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const indicators = document.querySelectorAll('.indicator');
+            const prevBtn = document.querySelector('.slideshow-prev');
+            const nextBtn = document.querySelector('.slideshow-next');
+            let currentSlide = 0;
+            let slideInterval;
+
+            // 初始化轮播图
+            function initSlideshow() {
+                // 显示第一张幻灯片
+                showSlide(currentSlide);
+                
+                // 开始自动播放
+                startAutoPlay();
+                
+                // 添加事件监听器
+                prevBtn.addEventListener('click', showPrevSlide);
+                nextBtn.addEventListener('click', showNextSlide);
+                
+                // 为指示器添加点击事件
+                indicators.forEach((indicator, index) => {
+                    indicator.addEventListener('click', () => {
+                        showSlide(index);
+                    });
+                });
+                
+                // 鼠标悬停时暂停自动播放
+                const slideshowContainer = document.querySelector('.slideshow-container');
+                slideshowContainer.addEventListener('mouseenter', pauseAutoPlay);
+                slideshowContainer.addEventListener('mouseleave', startAutoPlay);
+            }
+
+            // 显示特定幻灯片
+            function showSlide(n) {
+                // 隐藏所有幻灯片
+                slides.forEach(slide => {
+                    slide.classList.remove('active');
+                });
+                
+                // 移除所有指示器的active类
+                indicators.forEach(indicator => {
+                    indicator.classList.remove('active');
+                });
+                
+                // 更新当前幻灯片索引
+                currentSlide = n;
+                
+                // 显示当前幻灯片
+                slides[currentSlide].classList.add('active');
+                
+                // 激活当前指示器
+                indicators[currentSlide].classList.add('active');
+            }
+
+            // 显示下一张幻灯片
+            function showNextSlide() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }
+
+            // 显示上一张幻灯片
+            function showPrevSlide() {
+                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                showSlide(currentSlide);
+            }
+
+            // 开始自动播放
+            function startAutoPlay() {
+                slideInterval = setInterval(showNextSlide, 5000); // 5秒切换一次
+            }
+
+            // 暂停自动播放
+            function pauseAutoPlay() {
+                clearInterval(slideInterval);
+            }
+
+            // 初始化轮播图
+            initSlideshow();
+        });
+
+    (function() {
     'use strict';
     
     const config = {
         logoObjectId: 'yiyatech-logo-svg',
         scrollStart: 0,        // 开始消失动画的滚动位置
-        scrollEnd: 800,       // 完全消失的滚动位置
+        scrollEnd: 1000,       // 完全消失的滚动位置
         maxRetries: 15,
         retryInterval: 150
     };
