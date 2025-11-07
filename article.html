@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 标题会由JS动态设置 -->
+    <title>正在加载... - 怡亚科技</title>
+    <link rel="stylesheet" href="footer.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="blog.css">
+   <style>
+    /* 返回链接样式 - 靠左侧侧 */
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 20px;
+        margin-bottom: 30px;
+        background: #f8f9fa;
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        color: #495057;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        /* 靠右侧对齐 */
+        align-self: flex-end;
+        margin-right: auto;
+    }
+
+    .back-link:hover {
+        background: #e9ecef;
+        border-color: #dee2e6;
+        color: #212529;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        text-decoration: none;
+    }
+
+    /* 主容器样式 */
+    main {
+        max-width: 1200px;
+        min-height: 100vh;
+        margin: 0 auto;
+        padding: 100px 20px 60px;
+        box-sizing: border-box;
+        /* 使用flex布局让返回按钮靠右 */
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; /* 内容左对齐 */
+    }
+
+    /* 文章内容容器 - 左对齐 */
+    #article-content {
+        max-width: 1200px;
+        width: 100%;
+        margin: 0 auto;
+        line-height: 1.7;
+        text-align: left; /* 确保文字左对齐 */
+    }
+
+    /* 错误消息样式 - 左对齐 */
+    .error-message {
+        text-align: left; /* 改为左对齐 */
+        color: #dc3545;
+        padding: 40px 20px;
+        background: #f8d7da;
+        border-radius: 8px;
+        border: 1px solid #f5c6cb;
+    }
+
+    /* 加载状态样式 - 左对齐 */
+    #article-content p {
+        text-align: left; /* 改为左对齐 */
+        color: #6c757d;
+        padding: 40px 20px;
+        font-size: 1.1em;
+    }
+
+    /* 确保文章内容中的所有元素都左对齐 */
+    #article-content h1,
+    #article-content h2,
+    #article-content h3,
+    #article-content p,
+    #article-content ul,
+    #article-content ol,
+    #article-content blockquote {
+        text-align: left;
+    }
+
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+        main {
+            padding: 80px 15px 40px;
+        }
+        
+        .back-link {
+            padding: 10px 16px;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+            align-self: flex-end; /* 移动端也保持右对齐 */
+        }
+    }
+</style>
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <main>
+        <a href="community-content.html" class="back-link">
+            <span>&larr;</span>
+        </a>
+        <div id="article-content">
+            <!-- 单篇文章内容将由JS动态生成在这里 -->
+            <p>正在加载文章内容...</p>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // 封装一个函数用于加载HTML片段
+        function loadComponent(url, elementId) {
+            return fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok for ' + url);
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    const element = document.getElementById(elementId);
+                    if (element) {
+                        element.innerHTML = data;
+                    }
+                })
+                .catch(error => {
+                    console.error('Failed to load component:', error);
+                    const element = document.getElementById(elementId);
+                    if (element) {
+                        element.innerHTML = `<p style="color:red; text-align:center;">Error loading content from ${url}.</p>`;
+                    }
+                });
+        }
+
+        // 页面加载完成后执行
+        document.addEventListener("DOMContentLoaded", function() {
+            // 1. 加载头部和脚部
+            Promise.all([
+                loadComponent('header.html', 'header-placeholder'),
+                loadComponent('footer.html', 'footer-placeholder')
+            ]);
+
+            // 2. 解析URL，获取文章ID
+            const params = new URLSearchParams(window.location.search);
+            const articleId = params.get('id');
+            const articleContainer = document.getElementById('article-content');
+
+            if (!articleId) {
+                articleContainer.innerHTML = '<h2 class="error-message">错误：未指定文章ID。</h2>';
+                return;
+            }
+
+            // 3. 加载文章内容
+            fetch('articles-index.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('无法加载文章索引');
+                    }
+                    return response.json();
+                })
+                .then(articles => {
+                    // 找到与ID匹配的文章信息
+                    const article = articles.find(a => a.id === articleId);
+
+                    if (!article) {
+                        articleContainer.innerHTML = `<h2 class="error-message">错误：找不到ID为 "${articleId}" 的文章。</h2>`;
+                        return;
+                    }
+
+                    // 动态设置页面标题
+                    document.title = article.title + " - 怡亚科技";
+
+                    // 加载并显示文章的具体内容HTML文件
+                    fetch(article.contentFile)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('无法加载文章内容');
+                            }
+                            return response.text();
+                        })
+                        .then(contentHtml => {
+                            articleContainer.innerHTML = contentHtml;
+                            
+                            // 确保文章内容有合适的样式
+                            const articleElements = articleContainer.querySelectorAll('h1, h2, h3, p, ul, ol, blockquote');
+                            articleElements.forEach(element => {
+                                element.style.marginTop = '1.5em';
+                                element.style.marginBottom = '1em';
+                            });
+                        })
+                        .catch(error => {
+                            console.error('加载文章内容失败:', error);
+                            articleContainer.innerHTML = '<h2 class="error-message">无法加载文章内容，请稍后再试。</h2>';
+                        });
+                })
+                .catch(error => {
+                    console.error('加载文章索引失败:', error);
+                    articleContainer.innerHTML = '<h2 class="error-message">无法加载文章索引，请稍后再试。</h2>';
+                });
+        });
+    </script>
+
+</body>
+</html>
