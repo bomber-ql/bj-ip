@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全域智能营销洞察 - 怡亚科技</title>
+    <link rel="stylesheet" href="footer.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="blog.css">
+    
+</head>
+<body>
+
+    <!-- 头部占位符 -->
+    <div id="header-placeholder"></div>
+
+    <main>
+         <div class="content-container">
+        <!-- 页面标题 -->
+        <h1 class="page-title">全域智能洞察</h1>  </div>
+        <!-- 全屏横幅容器 -->
+        <div class="title-banner">
+            <iframe src="3d.html" class="banner-iframe" title="3D智能数据可视化"></iframe>
+        </div>
+
+        <!-- 分类导航按钮 -->
+        <div class="category-nav">
+            <button class="category-btn active" onclick="filterArticlesByCategory('数据洞察')">📊 数据洞察</button>
+            <button class="category-btn" onclick="filterArticlesByCategory('品牌策略')">🎯 品牌策略</button>
+            <button class="category-btn" onclick="filterArticlesByCategory('品牌活动')">🎪 品牌活动</button>
+        </div>
+
+        <!-- 筛选信息显示 -->
+        <div class="filter-info" id="filterInfo">
+            正在加载全域智能洞察相关文章...
+        </div>
+
+        <div id="article-list">
+            <!-- 文章列表将由JavaScript动态生成在这里 -->
+        </div>
+    </main>
+
+    <!-- 脚部占位符 -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // 您现有的JavaScript代码保持不变...
+        // 封装一个函数用于加载HTML片段
+        function loadComponent(url, elementId) {
+            return fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok for ' + url);
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    const element = document.getElementById(elementId);
+                    if (element) {
+                        element.innerHTML = data;
+                    } else {
+                        console.error('Element with id "' + elementId + '" not found.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Failed to load component:', error);
+                    const element = document.getElementById(elementId);
+                    if (element) {
+                        element.innerHTML = `<p style="color:red; text-align:center;">Error loading content from ${url}.</p>`;
+                    }
+                });
+        }
+
+        let allArticles = []; // 存储所有文章数据
+        let currentCategory = '数据洞察'; // 当前选中的分类
+
+        // 按分类筛选文章
+        function filterArticlesByCategory(category) {
+            currentCategory = category;
+            
+            // 更新按钮激活状态
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            filterArticles(allArticles);
+        }
+
+        // 筛选文章
+        function filterArticles(articles) {
+            const articleListContainer = document.getElementById('article-list');
+            const filterInfo = document.getElementById('filterInfo');
+            
+            // 根据当前分类筛选
+            const filteredArticles = articles.filter(article => 
+                article.tags && article.tags.includes(currentCategory)
+            );
+            
+            filterInfo.textContent = `显示"${currentCategory}"相关文章，共 ${filteredArticles.length} 篇`;
+            filterInfo.style.display = filteredArticles.length > 0 ? 'block' : 'none';
+            
+            displayArticles(filteredArticles);
+        }
+
+        // 显示文章列表
+        function displayArticles(articles) {
+            const articleListContainer = document.getElementById('article-list');
+            
+            if (articles.length === 0) {
+                articleListContainer.innerHTML = `
+                    <div class="no-articles">
+                        <p>暂无${currentCategory}相关文章。</p>
+                        <p>请检查文章是否已添加"${currentCategory}"标签。</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // 对文章按日期倒序排序
+            articles.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            let articlesHTML = '';
+            articles.forEach(article => {
+                // 根据分类显示对应的标签样式
+                let categoryTag = '';
+                if (article.tags && article.tags.includes(currentCategory)) {
+                    let tagClass = '';
+                    if (currentCategory === '数据洞察') tagClass = 'data-insight-tag';
+                    else if (currentCategory === '品牌策略') tagClass = 'brand-strategy-tag';
+                    else if (currentCategory === '品牌活动') tagClass = 'brand-activity-tag';
+                    
+                    categoryTag = `<div class="article-tags"><span class="article-tag ${tagClass}">${currentCategory}</span></div>`;
+                }
+                
+                articlesHTML += `
+                    <article class="article-entry">
+                        <h2><a href="article.html?id=${article.id}">${article.title}</a></h2>
+                        <p class="article-meta">发布于 ${article.date} | 作者: ${article.author || '怡亚科技'}</p>
+                        ${categoryTag}
+                        <p class="article-summary">${article.summary}</p>
+                        <a href="article.html?id=${article.id}" class="read-more">阅读全文 &rarr;</a>
+                    </article>
+                `;
+            });
+            articleListContainer.innerHTML = articlesHTML;
+        }
+
+        // 页面加载完成后执行
+        document.addEventListener("DOMContentLoaded", function() {
+            // 1. 加载头部和脚部
+            Promise.all([
+                loadComponent('header.html', 'header-placeholder'),
+                loadComponent('footer.html', 'footer-placeholder')
+            ]);
+
+            // 2. 加载并显示文章列表
+            fetch('articles-index.json')
+                .then(response => response.json())
+                .then(articles => {
+                    allArticles = articles;
+                    // 默认显示"数据洞察"分类
+                    filterArticles(articles);
+                })
+                .catch(error => {
+                    console.error('加载文章列表失败:', error);
+                    const articleListContainer = document.getElementById('article-list');
+                    const filterInfo = document.getElementById('filterInfo');
+                    if (articleListContainer) {
+                        articleListContainer.innerHTML = '<p>无法加载文章列表，请稍后再试。</p>';
+                    }
+                    if (filterInfo) {
+                        filterInfo.textContent = '加载文章列表失败';
+                    }
+                });
+        });
+
+        // 确保函数在全局作用域
+        window.filterArticlesByCategory = function(category) {
+            console.log('filterArticlesByCategory被调用，分类:', category);
+            
+            currentCategory = category;
+            
+            // 更新按钮激活状态
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.includes(category)) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            filterArticles(allArticles);
+        };
+
+        // 在insights.html的现有JavaScript代码中添加URL参数处理
+        function handleURLParameters() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const category = urlParams.get('category');
+            
+            if (category === 'strategy') {
+                currentCategory = '品牌策略';
+            } else if (category === 'activities') {
+                currentCategory = '品牌活动';
+            } else {
+                currentCategory = '数据洞察';
+            }
+            
+            // 更新按钮状态
+            updateCategoryButtons();
+            
+            // 筛选文章
+            if (window.allArticles && window.allArticles.length > 0) {
+                filterArticles(window.allArticles);
+            }
+        }
+
+        // 更新分类按钮状态
+        function updateCategoryButtons() {
+            const buttons = document.querySelectorAll('.category-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.includes(currentCategory)) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        // 在页面加载完成后调用
+        document.addEventListener("DOMContentLoaded", function() {
+            // 处理URL参数
+            handleURLParameters();
+        });
+    </script>
+
+</body>
+</html>

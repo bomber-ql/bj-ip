@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>怡亚科技-3d背景</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #000;
+            color: #fff;
+        }
+        canvas {
+            display: block;
+        }
+        .info {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            color: rgba(255, 255, 255, 0.5);
+            font-family: monospace;
+            font-size: 14px;
+            z-index: 100;
+            background: rgba(0,0,0,0.7);
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+        // --- 优化的 Perlin Noise Implementation ---
+        class ImprovedPerlin {
+            constructor() {
+                this.gradients = new Map();
+                this.memory = new Map();
+            }
+            
+            rand_vect() {
+                const theta = Math.random() * 2 * Math.PI;
+                return {x: Math.cos(theta), y: Math.sin(theta)};
+            }
+            
+            dot_prod_grid(x, y, vx, vy) {
+                const key = `${vx},${vy}`;
+                let g_vect;
+                
+                if (this.gradients.has(key)) {
+                    g_vect = this.gradients.get(key);
+                } else {
+                    g_vect = this.rand_vect();
+                    this.gradients.set(key, g_vect);
+                }
+                
+                const d_vect = {x: x - vx, y: y - vy};
+                return d_vect.x * g_vect.x + d_vect.y * g_vect.y;
+            }
+            
+            smootherstep(x) {
+                return 6 * x ** 5 - 15 * x ** 4 + 10 * x ** 3;
+            }
+            
+            interp(x, a, b) {
+                return a + this.smootherstep(x) * (b - a);
+            }
+            
+            get(x, y) {
+                const key = `${x},${y}`;
+                if (this.memory.has(key)) {
+                    return this.memory.get(key);
+                }
+                
+                const xf = Math.floor(x);
+                const yf = Math.floor(y);
+                
+                const tl = this.dot_prod_grid(x, y, xf, yf);
+                const tr = this.dot_prod_grid(x, y, xf + 1, yf);
+                const bl = this.dot_prod_grid(x, y, xf, yf + 1);
+                const br = this.dot_prod_grid(x, y, xf + 1, yf + 1);
+                
+                const xt = this.interp(x - xf, tl, tr);
+                const xb = this.interp(x - xf, bl, br);
+                const v = this.interp(y - yf, xt, xb);
+                
+                // 限制内存使用，定期清理
+                if (this.memory.size > 10000) {
+                    const keys = Array.from(this.memory.keys());
+                    for (let i = 0; i < 2000; i++) {
+                        this.memory.delete(keys[i]);
+                    }
+                }
+                
+                this.memory.set(key, v);
+                return v;
+            }
+            
+            // 定期清理内存的方法
+            clearMemory() {
+                if (this.memory.size > 5000) {
+                    const keys = Array.from(this.memory.keys());
+                    // 保留最近的一半，删除较旧的一半
+                    const toDelete = keys.slice(0, Math.floor(keys.length / 2));
+                    toDelete.forEach(key => this.memory.delete(key));
+                }
+            }
+        }
+
+        const perlin = new ImprovedPerlin();
+
+        // --- Three.js Scene Setup ---
+        let scene, camera, renderer, controls;
+        let terrain, particles;
+        let time = 0;
+        let frameId = null;
+
+        // --- Configuration ---
+        const config = {
+            gridSize: 2000,          // 地形平面的大小
+            segments: 50,          // 地形网格的精细度 (已优化)
+            noiseScale: 50,        // 噪声缩放，值越大地形越平滑
+            amplitude: 550,          // 地形起伏高度
+            particleDensity: 0.05,  // 粒子密度 (已降低)
+            animationSpeed: 0.002,  // 动画速度 (已降低)
+            colorStart: new THREE.Color(0xffffff), // 左侧颜色 (白色)
+            colorEnd: new THREE.Color(0xffd700)    // 右侧颜色 (金色)
+        };
+
+        function init() {
+            // Scene
+            scene = new THREE.Scene();
+            scene.fog = new THREE.Fog(0x000000, 1, 1000);
+
+            // Camera
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
+            camera.position.set(0, 80, 250);
+
+            // Renderer
+            renderer = new THREE.WebGLRenderer({ 
+                antialias: true,
+                powerPreference: "high-performance"
+            });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // 限制像素比
+            document.body.appendChild(renderer.domElement);
+
+            // Controls
+            controls = new OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+            controls.minDistance = 50;
+            controls.maxDistance = 600;
+            controls.maxPolarAngle = Math.PI / 2;
+            
+            controls.enableZoom = false;
+            // Create geometry
+            createLandscape();
+
+            // Event Listeners
+            window.addEventListener('resize', onWindowResize, false);
+            // 添加页面可见性变化监听
+            document.addEventListener('visibilitychange', onVisibilityChange);
+
+            animate();
+        }
+
+        function createLandscape() {
+            // 如果已存在地形，先清理
+            if (terrain) {
+                scene.remove(terrain);
+                terrain.geometry.dispose();
+                terrain.material.dispose();
+            }
+            if (particles) {
+                scene.remove(particles);
+                particles.geometry.dispose();
+                particles.material.dispose();
+            }
+
+            const vertices = [];
+            const colors = [];
+            const particleVertices = [];
+            const particleColors = [];
+
+            const segmentSize = config.gridSize / config.segments;
+
+            // Generate vertices and colors
+            for (let i = 0; i <= config.segments; i++) {
+                for (let j = 0; j <= config.segments; j++) {
+                    const x = i * segmentSize - config.gridSize / 2;
+                    const z = j * segmentSize - config.gridSize / 2;
+                    
+                    // The y-coordinate (height) will be calculated in the animate loop
+                    vertices.push(x, 0, z);
+
+                    // Calculate color based on x position
+                    const colorProgress = (i / config.segments);
+                    const color = new THREE.Color().lerpColors(config.colorStart, config.colorEnd, colorProgress);
+                    colors.push(color.r, color.g, color.b);
+
+                    // Add particles randomly (降低密度)
+                    if (Math.random() < config.particleDensity) {
+                         particleVertices.push(x, 0, z);
+                         particleColors.push(color.r, color.g, color.b);
+                    }
+                }
+            }
+
+            // --- Create Line Geometry ---
+            const lineIndices = [];
+            for (let i = 0; i < config.segments; i++) {
+                for (let j = 0; j < config.segments; j++) {
+                    const a = i * (config.segments + 1) + j;
+                    const b = a + 1;
+                    const c = a + (config.segments + 1);
+                    const d = c + 1;
+                    
+                    lineIndices.push(a, b); // Horizontal line
+                    lineIndices.push(a, c); // Vertical line
+                }
+            }
+             // Add last row/column lines
+            for (let i = 0; i < config.segments; i++) {
+                lineIndices.push(i * (config.segments + 1) + config.segments, (i + 1) * (config.segments + 1) + config.segments);
+                lineIndices.push(config.segments * (config.segments + 1) + i, config.segments * (config.segments + 1) + i + 1);
+            }
+
+            const lineGeometry = new THREE.BufferGeometry();
+            lineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+            lineGeometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+            lineGeometry.setIndex(lineIndices);
+
+            const lineMaterial = new THREE.LineBasicMaterial({ 
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.5
+            });
+            terrain = new THREE.LineSegments(lineGeometry, lineMaterial);
+            scene.add(terrain);
+
+            // --- Create Particle Geometry ---
+            const particleGeometry = new THREE.BufferGeometry();
+            particleGeometry.setAttribute('position', new THREE.Float32BufferAttribute(particleVertices, 3));
+            particleGeometry.setAttribute('color', new THREE.Float32BufferAttribute(particleColors, 3));
+
+            const particleMaterial = new THREE.PointsMaterial({
+                vertexColors: true,
+                size: 1.5,
+                transparent: true,
+                opacity: 0.8
+            });
+            particles = new THREE.Points(particleGeometry, particleMaterial);
+            scene.add(particles);
+        }
+
+        function animate() {
+            frameId = requestAnimationFrame(animate);
+            
+            // 当页面不可见时暂停动画
+            if (document.hidden) {
+                return;
+            }
+            
+            time += config.animationSpeed;
+            controls.update();
+
+            // 定期清理Perlin噪声内存
+            if (Math.floor(time * 100) % 100 === 0) {
+                perlin.clearMemory();
+            }
+
+            // --- Update Terrain and Particle Heights ---
+            const terrainPositions = terrain.geometry.attributes.position;
+            const particlePositions = particles.geometry.attributes.position;
+
+            // 使用更高效的方式更新顶点
+            updateGeometryHeights(terrainPositions, 0);
+            updateGeometryHeights(particlePositions, 0.5);
+
+            terrainPositions.needsUpdate = true;
+            particlePositions.needsUpdate = true;
+
+            renderer.render(scene, camera);
+        }
+
+        // 优化的高度更新函数
+        function updateGeometryHeights(positions, heightOffset = 0) {
+            const count = positions.count;
+            const positionArray = positions.array;
+            
+            for (let i = 0; i < count; i++) {
+                const x = positionArray[i * 3];
+                const z = positionArray[i * 3 + 2];
+                
+                const noiseVal = perlin.get(x / config.noiseScale, z / config.noiseScale + time);
+                const profile = Math.sin(Math.PI * ((x + config.gridSize/2) / config.gridSize));
+                
+                positionArray[i * 3 + 1] = noiseVal * config.amplitude * profile + heightOffset;
+            }
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function onVisibilityChange() {
+            if (document.hidden) {
+                // 页面不可见时，可以进一步优化性能
+                config.animationSpeed = 0.0005;
+            } else {
+                // 页面可见时恢复正常速度
+                config.animationSpeed = 0.002;
+            }
+        }
+
+        // 清理函数
+        function cleanup() {
+            if (frameId) {
+                cancelAnimationFrame(frameId);
+            }
+            
+            if (controls) {
+                controls.dispose();
+            }
+            
+            if (renderer) {
+                renderer.dispose();
+            }
+            
+            // 清理场景中的对象
+            if (scene) {
+                while(scene.children.length > 0) { 
+                    const object = scene.children[0];
+                    if (object.geometry) object.geometry.dispose();
+                    if (object.material) {
+                        if (Array.isArray(object.material)) {
+                            object.material.forEach(material => material.dispose());
+                        } else {
+                            object.material.dispose();
+                        }
+                    }
+                    scene.remove(object);
+                }
+            }
+        }
+
+        // 页面卸载时清理资源
+        window.addEventListener('beforeunload', cleanup);
+
+        init();
+    </script>
+</body>
+</html>
