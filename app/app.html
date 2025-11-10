@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown文章生成器</title>
+    <link rel="stylesheet" href="app.css">
+
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📝 Markdown文章生成器</h1>
+            <p>直接粘贴JSON数据，一键生成HTML文章</p>
+        </div>
+        
+        <div class="content">
+            <div class="panel">
+                <div class="panel-header">输入JSON数据</div>
+                <div class="panel-body">
+                    <textarea id="jsonInput" placeholder='粘贴完整的JSON数据，例如：
+{
+  "author": "怡亚科技",
+  "markdown_content": "### 标题\\n内容...",
+  "summary": "摘要",
+  "title": ["文章标题"],
+  "tags": ["标签1", "标签2"]
+}'></textarea>
+                    
+                    <!-- 标签管理 -->
+                    <div class="tag-controls">
+                        <strong>文章标签：</strong>
+                        
+                        <!-- 快速标签按钮 -->
+                        <div class="quick-tags">
+                            <button class="quick-tag-btn" onclick="addQuickTag('数据洞察')">📊 数据洞察</button>
+                            <button class="quick-tag-btn" onclick="addQuickTag('品牌策略')">🎯 品牌策略</button>
+                            <button class="quick-tag-btn" onclick="addQuickTag('品牌活动')">🎪 品牌活动</button>
+                        </div>
+                        
+                        <div class="tag-input">
+                            <input type="text" id="tagInput" placeholder="输入标签并按回车添加">
+                            <button class="btn" onclick="addTag()" style="padding: 8px 15px;">添加标签</button>
+                        </div>
+                        <div class="tag-list" id="tagList">
+                            <!-- 标签将在这里显示 -->
+                        </div>
+                    </div>
+                    
+                    <div class="controls">
+                        <button class="btn" onclick="generateArticle()">🚀 解析并生成文章</button>
+                        <button class="btn btn-secondary" onclick="clearAll()">🗑️ 清空所有</button>
+                    </div>
+                    <div id="status"></div>
+                </div>
+            </div>
+            
+            <div class="panel">
+                <div class="panel-header">生成结果</div>
+                <div class="panel-body">
+                    <div class="output-info">
+                        <strong>文件名：</strong><span id="filename">尚未生成</span>
+                    </div>
+                    <textarea id="htmlOutput" placeholder="生成的HTML内容将显示在这里..." readonly></textarea>
+                    <textarea id="jsonOutput" placeholder="生成的JSON数据将显示在这里..." readonly></textarea>
+                    <div class="controls">
+                        <button class="btn btn-success" onclick="downloadHTML()">📄 下载HTML文件</button>
+                        <button class="btn btn-success" onclick="downloadJSON()">📋 下载JSON文件</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 图片管理面板 -->
+            <div class="panel">
+                <div class="panel-header">🖼️ 图片管理</div>
+                <div class="panel-body">
+                    <div class="controls">
+                        <input type="file" id="imageUpload" accept="image/*" style="display: none;" onchange="handleImageUpload(this.files)">
+                        <button class="btn" onclick="document.getElementById('imageUpload').click()">📁 上传图片</button>
+                        <button class="btn btn-secondary" onclick="clearUploadedImages()">🗑️ 清空图片</button>
+                    </div>
+                    <div class="output-info">
+                        <strong>已上传图片：</strong><span id="imageCount">0</span> 张
+                        <br><small>点击图片将其添加到文章中（图片将直接插入到生成的HTML）</small>
+                    </div>
+                    
+                    <!-- 选中的图片信息 -->
+                    <div id="selectedImagesInfo" class="selected-images-info" style="display: none;">
+                        <strong>已选中图片：</strong><span id="selectedCount">0</span> 张
+                        <button class="btn" style="padding: 4px 8px; font-size: 12px; margin-left: 10px;" onclick="clearSelectedImages()">清除选择</button>
+                    </div>
+                    
+                    <div class="image-position-controls">
+                        <strong>图片插入位置：</strong>
+                        <div class="position-option">
+                            <input type="radio" id="positionStart" name="imagePosition" value="start" checked>
+                            <label for="positionStart">文章开头</label>
+                        </div>
+                        <div class="position-option">
+                            <input type="radio" id="positionEnd" name="imagePosition" value="end">
+                            <label for="positionEnd">文章末尾</label>
+                        </div>
+                        <div class="position-option">
+                            <input type="radio" id="positionCustom" name="imagePosition" value="custom">
+                            <label for="positionCustom">自定义位置</label>
+                        </div>
+                    </div>
+                    
+                    <div id="imageList" style="max-height: 150px; overflow-y: auto; margin-top: 10px; display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px;">
+                        <!-- 图片列表将在这里动态生成 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 文章管理面板 -->
+            <div class="panel" style="grid-column: 1 / -1;">
+                <div class="panel-header">📚 文章管理</div>
+                <div class="panel-body">
+                    <div class="controls">
+                        <button class="btn" onclick="exportIndex()">📤 导出完整索引</button>
+                        <button class="btn" onclick="importIndex()">📥 导入索引</button>
+                        <button class="btn btn-secondary" onclick="clearAllArticles()">🗑️ 清空所有</button>
+                    </div>
+                    
+                    <!-- 标签筛选 -->
+                    <div class="filter-controls">
+                        <strong>按标签筛选：</strong>
+                        <div class="filter-tags" id="filterTags">
+                            <span class="filter-tag active" onclick="setFilter('all')">全部</span>
+                            <!-- 标签筛选选项将在这里动态生成 -->
+                        </div>
+                    </div>
+                    
+                    <div class="output-info">
+                        <strong>当前文章数：</strong><span id="articleCount">0</span>
+                        <span id="filterInfo" style="margin-left: 10px;"></span>
+                    </div>
+                    
+                    <div id="articleList" style="max-height: 200px; overflow-y: auto; margin-top: 10px;">
+                        <!-- 文章列表将在这里动态生成 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 在现有面板中添加SEO优化面板 -->
+<div class="panel">
+    <div class="panel-header">🔍 SEO优化建议</div>
+    <div class="panel-body">
+        <div id="seoAnalysis" style="max-height: 300px; overflow-y: auto;">
+            <div class="seo-section">
+                <h4>关键词分析</h4>
+                <div id="keywordAnalysis"></div>
+            </div>
+            
+            <div class="seo-section">
+                <h4>内容结构</h4>
+                <div id="structureAnalysis"></div>
+            </div>
+            
+            <div class="seo-section">
+                <h4>内部链接建议</h4>
+                <div id="internalLinks"></div>
+            </div>
+            
+            <div class="seo-section">
+                <h4>图片优化</h4>
+                <div id="imageSeo"></div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button class="btn" onclick="applySeoOptimizations()">✨ 应用SEO优化</button>
+            <button class="btn btn-secondary" onclick="generateSeoReport()">📊 生成SEO报告</button>
+        </div>
+    </div>
+</div>
+
+</body>
+
+<script src="app-markdown.js"></script>
+<script src="app-img.js"></script>
+<script src="app-seo.js"></script>
+<script src="app-json-parser.js"></script>
+<script src="app-file-downloader.js"></script>
+<script src="app-article-generator.js"></script>
+<script src="app-tags.js"></script>
+<script src="app-article-list.js"></script>
+<script src="app.js"></script>
+
+
+
+
+</html>
