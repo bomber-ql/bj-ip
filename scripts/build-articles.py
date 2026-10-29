@@ -101,21 +101,26 @@ def add_image_attrs(html: str, title: str) -> str:
 
     def repl(m):
         tag = m.group(0)
-        if " alt=" in tag:
-            return tag
-        n["i"] += 1
         src = re.search(r'src="([^"]+)"', tag)
         if not src:
             return tag
-        path = src.group(1)
-        alt = f"{title} - 图{n['i']}"
-        extra = f' alt="{alt}" loading="lazy" decoding="async"'
-        local = ROOT / path.lstrip("/")
-        try:
-            with Image.open(local) as im:
-                extra += f' width="{im.width}" height="{im.height}"'
-        except Exception:
-            pass
+        n["i"] += 1
+        extra = ""
+        # alt 已有就保留原值，没有才补
+        if " alt=" not in tag:
+            extra += f' alt="{title} - 图{n["i"]}"'
+        if "loading=" not in tag:
+            extra += ' loading="lazy"'
+        if "decoding=" not in tag:
+            extra += ' decoding="async"'
+        # 尺寸独立判断，不看 alt（原逻辑因此在已有 alt 时漏掉 width/height）
+        if "width=" not in tag or "height=" not in tag:
+            local = ROOT / src.group(1).lstrip("/")
+            try:
+                with Image.open(local) as im:
+                    extra += f' width="{im.width}" height="{im.height}"'
+            except Exception:
+                pass
         return tag.replace("<img", f"<img{extra}", 1)
 
     return re.sub(r"<img[^>]*>", repl, html)
@@ -259,6 +264,7 @@ def build_page(a: dict, content: str, slug: str, desc: str, cover: str, related:
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="/style.css">
 <link rel="stylesheet" href="/footer.css">
+<link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
 <link rel="stylesheet" href="/blog.css">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="{BRAND}">
@@ -279,7 +285,7 @@ def build_page(a: dict, content: str, slug: str, desc: str, cover: str, related:
 <div id="header-placeholder">{load_partial("header.html")}</div>
 
 <main>
-<nav class="breadcrumb" aria-label="面包屑"><a href="/">主页</a><span>/</span><a href="/insights.html">全域智能洞察</a><span>/</span><span>{esc(title)}</span></nav>
+<div class="breadcrumb" role="navigation" aria-label="面包屑"><a href="/">主页</a><span>/</span><a href="/insights.html">全域智能洞察</a><span>/</span><span>{esc(title)}</span></div>
 <article id="article-content">
 <div class="article-header">
 <h1>{esc(title)}</h1>
@@ -354,6 +360,7 @@ def build_insights_page(articles: list, built: list) -> None:
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="/footer.css">
 <link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
 <link rel="stylesheet" href="/blog.css">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="{BRAND}">
@@ -387,10 +394,6 @@ def build_insights_page(articles: list, built: list) -> None:
   </div>
   <p class="no-articles" id="empty-tip" hidden>该分类下暂无文章。</p>
 
-  <!-- 3D 背景挪到折叠线以下，避免成为 LCP 元素拖慢首屏 -->
-  <div class="title-banner title-banner-bottom">
-    <iframe src="/3d.html" class="banner-iframe" title="3D 智能数据可视化" loading="lazy"></iframe>
-  </div>
 </main>
 
 <div id="footer-placeholder">{load_partial("footer.html")}</div>
@@ -416,6 +419,127 @@ def build_insights_page(articles: list, built: list) -> None:
 """
     (ROOT / "insights.html").write_text(html, encoding="utf-8")
     print(f"  ✓ insights.html（{len(cards)} 篇文章静态渲染，含筛选增强）")
+
+
+
+def sync_llms(articles: list, built: list) -> None:
+    """让 llms.txt 的文章清单跟着构建自动更新，避免手写漏更新。"""
+    f = ROOT / "llms.txt"
+    if not f.exists():
+        return
+    by_id = {b["id"]: b for b in built}
+    lines = []
+    for a in sorted(articles, key=lambda x: x.get("date", ""), reverse=True):
+        b = by_id.get(a["id"])
+        if not b:
+            continue
+        lead = (a.get("summary") or "").strip()
+        if len(lead) > 60:
+            lead = lead[:58] + "…"
+        lines.append(f'- [{a["title"]}]({SITE}/insights/{b["slug"]}.html)：{lead}')
+    block = "## 内容（全域智能洞察）\n\n" + "\n".join(lines)
+    text = f.read_text(encoding="utf-8")
+    head = text.split("## 内容（全域智能洞察）")[0]
+    tail = "## 引用说明"
+    rest = text.split(tail, 1)[1] if tail in text else ""
+    f.write_text(head + block + "\n\n" + tail + rest, encoding="utf-8")
+    print(f"  ✓ llms.txt 文章清单已同步（{len(lines)} 篇）")
+
+
+
+def build_sitemap_page() -> None:
+    """生成人能看的网站地图 /sitemap.html（机器那份是 sitemap.xml）。"""
+    groups = [
+        ("主要页面", ["index.html", "work.html", "vision.html", "contact.html"]),
+        ("服务", ["services/index.html"] + sorted(
+            f"services/{x.name}" for x in (ROOT / "services").glob("*.html") if x.name != "index.html")),
+        ("全域智能洞察", ["insights.html"] + sorted(
+            f"insights/{x.name}" for x in (ROOT / "insights").glob("*.html"))),
+    ]
+    names = {
+        "index.html": "首页",
+        "work.html": "全域营销案例",
+        "vision.html": "关于我们",
+        "contact.html": "联系我们",
+        "services/index.html": "服务总览",
+        "insights.html": "全域智能洞察",
+    }
+
+    def label(path: str) -> str:
+        if path in names:
+            return names[path]
+        f = ROOT / path
+        if not f.exists():
+            return ""
+        html = f.read_text(encoding="utf-8")
+        h1 = re.search(r"<h1[^>]*>(.*?)</h1>", html, re.S)
+        if h1:
+            return re.sub(r"<[^>]+>", "", h1.group(1)).strip()
+        t = re.search(r"<title>(.*?)</title>", html, re.S)
+        return re.sub(r"\s+-\s+怡亚科技.*$", "", t.group(1)).strip() if t else path
+
+    def url(path: str) -> str:
+        if path == "index.html":
+            return f"{SITE}/"
+        if path.endswith("index.html"):
+            return f"{SITE}/{path[:-11]}"
+        return f"{SITE}/{path}"
+
+    blocks = []
+    for title, items in groups:
+        lis = []
+        for it in items:
+            if not (ROOT / it).exists():
+                continue
+            lis.append(f'        <li><a href="{url(it)}">{esc(label(it))}</a></li>')
+        if lis:
+            blocks.append(f"      <h2>{title}</h2>\n      <ul>\n" + "\n".join(lis) + "\n      </ul>")
+
+    ld = {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "网站地图",
+        "url": f"{SITE}/sitemap.html",
+        "inLanguage": "zh-CN",
+        "isPartOf": {"@type": "WebSite", "url": f"{SITE}/"},
+    }
+
+    html = f"""<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>网站地图 - 全部页面导航 | {BRAND}</title>
+<meta name="description" content="怡亚科技官网的完整页面索引：主要页面、四项服务、全域智能洞察文章，一页找到全部内容。">
+<meta name="author" content="{BRAND}">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="{SITE}/sitemap.html">
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="/sitemap.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{BRAND}">
+<meta property="og:title" content="网站地图 | {BRAND}">
+<meta property="og:url" content="{SITE}/sitemap.html">
+<meta property="og:image" content="{SITE}/img/og-cover.jpg">
+<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
+</head>
+<body>
+<div id="header-placeholder">{load_partial("header.html")}</div>
+
+<main class="sitemap-page">
+  <h1>网站地图</h1>
+  <p class="lead">这里列出站内所有页面。要了解我们做什么，从「服务」开始；想看方法论，去「全域智能洞察」。</p>
+{chr(10).join(blocks)}
+</main>
+
+<div id="footer-placeholder">{load_partial("footer.html")}</div>
+</body>
+</html>
+"""
+    (ROOT / "sitemap.html").write_text(html, encoding="utf-8")
+    print(f"  ✓ sitemap.html（{sum(len(b) for b in blocks) // 60} 组页面）")
 
 
 def main():
@@ -464,6 +588,7 @@ def main():
 
     # sitemap
     pages = [("", "1.0", "weekly"), ("services/", "0.9", "monthly"),
+             ("sitemap.html", "0.4", "monthly"),
              ("insights.html", "0.9", "weekly"),
              ("vision.html", "0.7", "monthly"), ("contact.html", "0.7", "monthly"),
              ("work.html", "0.6", "monthly")]
@@ -495,6 +620,8 @@ def main():
         json.dumps(built, ensure_ascii=False, indent=2), encoding="utf-8")
 
     build_insights_page(articles, built)
+    sync_llms(articles, built)
+    build_sitemap_page()
 
 
 if __name__ == "__main__":

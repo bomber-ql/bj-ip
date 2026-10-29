@@ -188,8 +188,8 @@ def main():
             if not terms:
                 continue
             hit = sum(1 for t in terms if t in flat) / len(terms)
-            if hit < 0.3:
-                warn.append((p, f"schema 说法与正文重合度仅 {hit:.0%}：{s[:34]}…"))
+            if hit < 0.15:
+                warn.append((p, f"schema 说法与正文几乎无重合（{hit:.0%}），可能是凭空添加：{s[:34]}…"))
 
         # ---------- B 质量 ----------
         if re.search(r'<meta\s+name="robots"\s+content="[^"]*noindex', html, re.I):
@@ -236,7 +236,8 @@ def main():
                 warn.append((p, f"alt 高度重复：'{c[0][:20]}' ×{c[1]}"))
 
         nvis = len(re.sub(r"\s", "", text))
-        if nvis < 300:
+        # 图库类页面（图片多）正文天然少，不算薄页面
+        if nvis < 300 and len(imgs) < 10:
             warn.append((p, f"可见正文仅 {nvis} 字（薄页面）"))
 
         dens = keyword_density(text)

@@ -13,6 +13,12 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://www.bj-ip.com/sitemap.html</loc>
+    <lastmod>2026-10-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
     <loc>https://www.bj-ip.com/insights.html</loc>
     <lastmod>2026-10-29</lastmod>
     <changefreq>weekly</changefreq>

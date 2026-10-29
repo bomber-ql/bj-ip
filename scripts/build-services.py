@@ -169,7 +169,7 @@ SERVICES = [
     {
         "slug": "immersive-experience",
         "h1": "AI · AR/VR · CG 营销体验",
-        "title": "AI、AR/VR、CG 互动营销 - 数字展厅与虚拟人 | 怡亚科技",
+        "title": "AI、AR/VR、CG 互动营销 - 数字展厅与虚拟人",
         "desc": "怡亚科技的营销技术服理：AR 互动与扫码体验、数字展厅与互动装置、虚拟人与数字分身、CG 产品片与三维动画、AI 内容生产流程，用技术换消费者的三秒停留。",
         "lead": "技术在这里不是炫技。我们判断一个技术该不该用，只有一个标准："
                 "它有没有让消费者多停留三秒，或者多相信你一点。"
@@ -247,7 +247,8 @@ def head(title: str, desc: str, url: str, schema: dict, extra_css: str = "") -> 
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="/style.css">
 <link rel="stylesheet" href="/footer.css">
-<link rel="stylesheet" href="/services.css">{extra_css}
+<link rel="stylesheet" href="/services.css">
+<link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">{extra_css}
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="{BRAND}">
 <meta property="og:locale" content="zh_CN">
@@ -331,7 +332,7 @@ def build_detail(s: dict) -> str:
 
 <main class="service-page">
   <div class="service-wrap">
-    <nav class="breadcrumb" aria-label="面包屑"><a href="/">主页</a><span>/</span><a href="/services/">服务</a><span>/</span><span>{esc(s['h1'])}</span></nav>
+    <div class="breadcrumb" role="navigation" aria-label="面包屑"><a href="/">主页</a><span>/</span><a href="/services/">服务</a><span>/</span><span>{esc(s['h1'])}</span></div>
     <h1>{esc(s['h1'])}</h1>
     <p class="lead">{esc(s['lead'])}</p>
 
@@ -430,7 +431,7 @@ def build_index() -> str:
 
 <main class="service-page">
   <div class="service-wrap">
-    <nav class="breadcrumb" aria-label="面包屑"><a href="/">主页</a><span>/</span><span>服务</span></nav>
+    <div class="breadcrumb" role="navigation" aria-label="面包屑"><a href="/">主页</a><span>/</span><span>服务</span></div>
     <h1>服务</h1>
     <p class="lead">怡亚科技做的事，可以拆成四条线：把品牌说清楚（策略与设计）、让人真的参与进来（活动与线下体验）、
     持续对外表达（内容与新媒体）、用技术换停留（AI·AR/VR·CG）。这四条线在同一个团队里，所以可以拆开做，也可以串起来做。</p>

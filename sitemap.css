@@ -1,0 +1,77 @@
+/* 网站地图页：站内默认是黑底白字，这一页要单独切成浅色 */
+body {
+    background: #ffffff;
+}
+
+.sitemap-page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 128px 24px 100px;
+    color: #1a1a1a;
+}
+
+.sitemap-page h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0 0 16px;
+}
+
+.sitemap-page .lead {
+    font-size: 16px;
+    line-height: 1.9;
+    color: #666;
+    margin: 0 0 48px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid #eee;
+}
+
+.sitemap-page h2 {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #a0a0a0;
+    margin: 40px 0 14px;
+}
+
+.sitemap-page ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sitemap-page li {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.sitemap-page li a {
+    display: block;
+    padding: 14px 4px;
+    font-size: 16px;
+    color: #111;
+    text-decoration: none;
+    transition: padding-left 0.2s ease, color 0.2s ease;
+}
+
+.sitemap-page li a:hover {
+    padding-left: 12px;
+    color: #0068b7;
+}
+
+@media (max-width: 768px) {
+    .sitemap-page {
+        padding: 100px 20px 64px;
+    }
+    .sitemap-page h1 {
+        font-size: 1.7rem;
+    }
+    .sitemap-page .lead {
+        font-size: 15px;
+        margin-bottom: 32px;
+    }
+    .sitemap-page li a {
+        font-size: 15px;
+        padding: 12px 2px;
+    }
+}

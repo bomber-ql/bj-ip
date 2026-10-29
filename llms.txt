@@ -40,11 +40,11 @@
 
 ## 内容（全域智能洞察）
 
-- [IP 打造方法论：构建从 0 到 1 完整框架的指南](https://www.bj-ip.com/insights/ip-creation-framework.html)：IP 定位、视觉、人格、内容生产的完整框架
-- [出海品牌高效链接全球媒体：从关键词到合作增长实战指南](https://www.bj-ip.com/insights/overseas-brand-global-media.html)：竞品分析、关键词策略、媒体挖掘与长期合作
-- [数字化营销变革：从传统困境到创新突破](https://www.bj-ip.com/insights/digital-marketing-transformation.html)：数据展示痛点、创新搜索营销玩法与趋势
-- [出海电商品牌策略：开启全球市场的成功密码](https://www.bj-ip.com/insights/overseas-ecommerce-brand-strategy.html)：市场调研、目标市场选择、品牌塑造与本地化
-- [医美小会：开启精准高效的营销新路径](https://www.bj-ip.com/insights/medical-aesthetics-marketing.html)：小规模高精准活动的邀约、现场与转化
+- [出海品牌高效链接全球媒体：从关键词到合作增长实战指南](https://www.bj-ip.com/insights/overseas-brand-global-media.html)：出海品牌如何高效链接全球媒体：从竞品分析锁定机会，到关键词策略定位媒体伙伴，再到建立长期合作关系，给出一套可落地的实…
+- [IP打造方法论：构建从0到1完整框架的指南](https://www.bj-ip.com/insights/ip-creation-framework.html)：IP打造从0到1的完整框架，涵盖定位、视觉、人格、内容生产等多方面，为打造成功IP提供了全面的方法论及核心原则，助力…
+- [数字化营销变革：从传统困境到创新突破](https://www.bj-ip.com/insights/digital-marketing-transformation.html)：文章剖析了传统数据展示与营销模式的痛点，介绍了多元的数据展示新方式，阐述创新搜索营销玩法及其优势，并对未来数据营销发…
+- [出海电商品牌策略：开启全球市场的成功密码](https://www.bj-ip.com/insights/overseas-ecommerce-brand-strategy.html)：面向出海电商的品牌策略全景：从宏观市场与消费者调研、目标市场选择，到品牌定位、视觉与叙事塑造，再到海外营销推广与供应…
+- [医美小会：开启精准高效的营销新路径](https://www.bj-ip.com/insights/medical-aesthetics-marketing.html)：医美小会是一种小规模、高精准、强互动的线下沟通方式：按项目主题精准邀约目标客户，通过专家面对面讲解、案例展示与深度沟…
 
 ## 引用说明
 

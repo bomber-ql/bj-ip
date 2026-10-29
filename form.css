@@ -1,0 +1,250 @@
+/* ===== 表单：首页短表单 + 联系页完整表单 ===== */
+
+.lead-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+
+.lead-form .form-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.lead-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 13px;
+    color: #888;
+    letter-spacing: 0.02em;
+}
+
+.lead-form label.full {
+    width: 100%;
+}
+
+.lead-form .req {
+    color: #e05252;
+    margin-left: 2px;
+}
+
+.lead-form input[type="text"],
+.lead-form input[type="tel"],
+.lead-form input[type="email"],
+.lead-form select,
+.lead-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 15px;
+    font-size: 15px;
+    font-family: inherit;
+    color: #111;
+    background: #fff;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.lead-form textarea {
+    resize: vertical;
+    min-height: 96px;
+    line-height: 1.7;
+}
+
+.lead-form input:focus,
+.lead-form select:focus,
+.lead-form textarea:focus {
+    border-color: #111;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.06);
+}
+
+.lead-form select {
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='%23888' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+}
+
+/* 蜜罐字段：正常人看不见，机器人会填 */
+.lead-form .hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.lead-form button {
+    align-self: flex-start;
+    padding: 14px 34px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: inherit;
+    color: #fff;
+    background: #111;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.lead-form button:hover {
+    transform: translateY(-1px);
+    opacity: 0.9;
+}
+
+.lead-form button:disabled {
+    opacity: 0.5;
+    cursor: default;
+    transform: none;
+}
+
+.lead-form .form-note {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #8a8a8a;
+}
+
+.lead-form .form-msg {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.7;
+    min-height: 0;
+}
+
+.lead-form .form-msg.ok {
+    color: #0a8f5b;
+}
+
+.lead-form .form-msg.err {
+    color: #c0392b;
+}
+
+.lead-form .form-msg a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+/* --- 首页 CTA 区块 --- */
+.cta-block {
+    background: #0d0d0d;
+    color: #fff;
+    padding: 88px 20px;
+}
+
+.cta-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
+    align-items: start;
+}
+
+.cta-left .eyebrow {
+    color: #7a7a7a;
+}
+
+.cta-left h2 {
+    font-size: 2.2rem;
+    line-height: 1.3;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0 0 18px;
+    color: #fff;
+}
+
+.cta-left p {
+    font-size: 15.5px;
+    line-height: 1.9;
+    color: #a8a8a8;
+    margin: 0 0 28px;
+    max-width: 30em;
+}
+
+.cta-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 14.5px;
+    color: #ccc;
+}
+
+.cta-contact a {
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px solid #444;
+    align-self: flex-start;
+    padding-bottom: 2px;
+}
+
+.cta-contact a:hover {
+    border-bottom-color: #fff;
+}
+
+/* --- 联系页表单区 --- */
+.contact-form-section {
+    padding: 80px 20px 64px;
+}
+
+/* 紧跟着的「怎么开始合作」不要再顶一遍，否则中间空一大截 */
+.contact-form-section + .contact-extra {
+    padding-top: 24px;
+}
+
+.contact-form-section h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: 0 0 10px;
+    color: #111;
+}
+
+.contact-form-section .intro {
+    font-size: 16px;
+    line-height: 1.9;
+    color: #555;
+    margin: 0 0 28px;
+}
+
+@media (max-width: 900px) {
+    .cta-inner {
+        grid-template-columns: 1fr;
+        gap: 36px;
+    }
+    .cta-left h2 {
+        font-size: 1.6rem;
+    }
+    .cta-block {
+        padding: 64px 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .lead-form .form-row {
+        grid-template-columns: 1fr;
+    }
+    .lead-form button {
+        width: 100%;
+        align-self: stretch;
+    }
+}
+
+/* 深色区块里的按钮要反色，否则和背景融在一起 */
+.cta-block .lead-form button {
+    background: #ffffff;
+    color: #111111;
+}
+
+.cta-block .lead-form input,
+.cta-block .lead-form select,
+.cta-block .lead-form textarea {
+    border-color: #2a2a2a;
+}

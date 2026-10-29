@@ -27,8 +27,9 @@
 
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="subpage.css">
+    <link rel="stylesheet" href="/form.css">
      <link rel="stylesheet" href="footer.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
     
     <!-- 规范链接 -->
     <link rel="canonical" href="https://www.bj-ip.com/contact.html">
@@ -100,15 +101,15 @@
                         <div class="business-inquiry">
     <div class="inquiry-types">
         <div class="inquiry-item">
-            <h4>品牌营销</h4>
+            <h3>品牌营销</h3>
             <p>品牌策略、定位、形象设计等全方位营销解决方案</p>
         </div>
         <div class="inquiry-item">
-            <h4>技术服务</h4>
+            <h3>技术服务</h3>
             <p>AI、AR/VR、CG等前沿技术应用与开发服务</p>
         </div>
         <div class="inquiry-item">
-            <h4>合作洽谈</h4>
+            <h3>合作洽谈</h3>
             <p>渠道合作、项目合作、战略合作等商务合作事宜</p>
         </div>
 <a href="mailto:yiyatech@bj-ip.com?subject=业务咨询" class="inquiry-btn">立即咨询</a>
@@ -117,6 +118,46 @@
                 </div>
             </div>
         </section>
+    <section class="contact-extra contact-form-section">
+      <div class="inner">
+        <h2>留个联系方式</h2>
+        <p class="intro">填完我们会在一个工作日内联系你。如果事情比较急，直接打 185 1050 1896 更快。</p>
+        <form class="lead-form" novalidate>
+          <input type="hidden" name="source" value="联系页表单">
+          <div class="form-row">
+            <label><span>称呼<span class="req">*</span></span>
+              <input type="text" name="name" required maxlength="20" autocomplete="name" placeholder="怎么称呼你">
+            </label>
+            <label><span>手机<span class="req">*</span></span>
+              <input type="tel" name="phone" required maxlength="20" autocomplete="tel" placeholder="方便回电的号码">
+            </label>
+          </div>
+          <div class="form-row">
+            <label>邮箱
+              <input type="email" name="email" maxlength="60" autocomplete="email" placeholder="选填">
+            </label>
+            <label>想聊哪一块
+              <select name="topic">
+                <option value="">选填，帮你转给对的人</option>
+                <option>品牌策略与设计</option>
+                <option>品牌活动与线下体验</option>
+                <option>内容与新媒体运营</option>
+                <option>AI · AR/VR · CG 营销体验</option>
+                <option>还没想好，想先聊聊</option>
+              </select>
+            </label>
+          </div>
+          <label class="full">项目情况
+            <textarea name="message" rows="4" maxlength="1000" placeholder="简单说说背景、想解决的问题、大概的时间节点"></textarea>
+          </label>
+          <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button type="submit">提交</button>
+          <p class="form-msg" role="status" aria-live="polite"></p>
+          <p class="form-note">只用于回复你的咨询，不会用来发广告，也不会转给第三方。</p>
+        </form>
+      </div>
+    </section>
+
     <section class="contact-extra">
       <div class="inner">
         <h2>怎么开始合作</h2>
@@ -142,15 +183,17 @@
     </main>
 
     <!-- 页脚 -->
-    <footer>
-        <div class="footer-container">
-            <div class="footer-content">
-                <!-- 公司信息区域 -->
-                <div class="footer-section">
-                    <h3>怡亚科技</h3>
-                    <p>为您提供最前沿的营销解决方案</p>
-                    <p>推动品牌营销化创新</p>
-                    <div class="social-links">
+    <div id="footer-placeholder">
+<!-- footer:auto -->
+<footer>
+            <div class="container">
+                <div class="footer-content">
+                    <!-- 公司信息区域 -->
+                    <div class="footer-section">
+                        <h3>怡亚科技</h3>
+                        <p>为您提供最前沿的营销解决方案</p>
+                        <p>推动品牌营销化创新</p>
+                        <div class="social-links">
                             <a href="tel:+8618510501896" aria-label="电话咨询">
                                 <i class="fas fa-phone"></i>
                             </a>
@@ -161,36 +204,41 @@
                                 <i class="fas fa-location-dot"></i>
                             </a>
                         </div> 
-                </div>
-                
-                <!-- 快速导航 -->
-                <div class="footer-section">
-                    <h4>快速导航</h4>
-                    <ul class="footer-links">
-                        <li><a href="index.html">主页</a></li>
-                        <li><a href="insights.html">全域智能洞察</a></li>
-                        <li><a href="vision.html">关于我们</a></li>
-                        <li><a href="contact.html">联系我们</a></li>
-                    </ul>
-                </div>
+                    </div>
+                    
+                    <!-- 快速导航 -->
+                    <div class="footer-section">
+                        <h4>快速导航</h4>
+                        <ul class="footer-links">
+                    <li><a href="/">主页</a></li>
+                    <li><a href="/services/">服务</a></li>
+                        <li><a href="/insights.html">全域智能洞察</a></li>
+                    <li><a href="/vision.html">关于我们</a></li>
+                    <li><a href="/contact.html">联系我们</a></li>
+                        <li><a href="/sitemap.html">网站地图</a></li>
+                        </ul>
+                    </div>
 
-                <!-- 二维码区域 -->
-                <div class="footer-section">
-                    <div class="qrcode-container">
-                        <div class="qrcode-item">
-                            <img src="img/qr.jpg" alt="怡亚科技联系方式二维码">
-                            <p>联系我们</p>
+                    <!-- 二维码区域 -->
+                    <div class="footer-section">
+                        <div class="qrcode-container">
+                            <div class="qrcode-item">
+                                <img src="/img/qr.jpg" alt="怡亚科技联系二维码" width="240" height="240" loading="lazy">
+                                <p>联系我们</p>
+                            </div>
                         </div>
                     </div>
                 </div>
+                
+                <div class="footer-bottom">
+                    <p>&copy; 2025 怡亚科技 保留所有权利</p>
+                </div>
             </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 怡亚科技 保留所有权利</p>
-            </div>
-        </div>
-    </footer>
+        </footer>
+<!-- /footer:auto -->
+</div>
     <script src="script.js"></script>
     <script src="logo_motion/logo-scroll-animation.js"></script>    
+    <script src="/form.js" defer></script>
 </body>
 </html>

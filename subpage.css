@@ -505,3 +505,105 @@ nav ul li a.active::after {
         padding: 10px 15px;
     }
 }
+
+/* ===== 联系页：合作流程与常见问题 ===== */
+.contact-extra {
+  background: #ffffff;
+  color: #1a1a1a;
+  padding: 80px 20px 96px;
+}
+
+.contact-extra .inner {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.contact-extra h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0 0 12px;
+  color: #111;
+}
+
+.contact-extra > .inner > p.intro {
+  font-size: 16px;
+  line-height: 1.9;
+  color: #555;
+  margin: 0 0 36px;
+}
+
+.howto {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin: 0 0 56px;
+}
+
+.howto .item {
+  border-top: 2px solid #000;
+  padding-top: 14px;
+}
+
+.howto .n {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: #aaa;
+}
+
+.howto h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 6px 0 8px;
+  color: #111;
+}
+
+.howto p {
+  font-size: 13.5px;
+  line-height: 1.8;
+  color: #555;
+  margin: 0;
+}
+
+.faq-list {
+  border-top: 1px solid #eee;
+}
+
+.faq-list details {
+  border-bottom: 1px solid #eee;
+  padding: 18px 0;
+}
+
+.faq-list summary {
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.faq-list summary::-webkit-details-marker { display: none; }
+
+.faq-list summary::after {
+  content: "+";
+  font-weight: 400;
+  color: #999;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.faq-list details[open] summary::after { content: "−"; }
+
+.faq-list p {
+  margin: 12px 0 0;
+  font-size: 15px;
+  line-height: 1.9;
+  color: #444;
+}
+
+@media (max-width: 768px) {
+  .contact-extra { padding: 56px 20px 64px; }
+  .howto { grid-template-columns: repeat(2, 1fr); }
+}
