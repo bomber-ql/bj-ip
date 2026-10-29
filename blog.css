@@ -715,6 +715,8 @@ table.geo-table tbody tr:last-child td {
 table.geo-table td:first-child {
     color: #111;
     font-weight: 500;
+    /* 首列多是短标签，太窄会被压成两行 */
+    min-width: 6.5em;
 }
 
 /* FAQ */
@@ -781,6 +783,10 @@ table.geo-table td:first-child {
     table.geo-table {
         font-size: 13.5px;
         min-width: 480px;
+    }
+    /* 手机端表格必然溢出，用右侧内阴影暗示「还能滑动」，否则看着像被切断了 */
+    .geo-table-wrap {
+        box-shadow: inset -12px 0 12px -7px rgba(0, 0, 0, 0.3);
     }
     table.geo-table thead th,
     table.geo-table td {

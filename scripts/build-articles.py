@@ -31,6 +31,8 @@ QUALITY = 82
 # 文章 id -> 语义化 slug（新增文章时在这里补一行，或留空自动生成）
 SLUG_MAP = {
     "ip01": "ip-creation-framework",
+    "geo01": "geo-website-audit",
+    "geo02": "geo-kpi-metrics",
     "article-miqvvmld-1osi": "overseas-brand-global-media",
     "article-mhqo73q0-csd8": "digital-marketing-transformation",
     "article-mhq9eitm-3wrg": "overseas-ecommerce-brand-strategy",
