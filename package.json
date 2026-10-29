@@ -1,0 +1,9 @@
+{
+  "name": "bj-ip-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "怡亚科技官网：静态页面 + Vercel 表单接收函数",
+  "dependencies": {
+    "nodemailer": "^6.9.0"
+  }
+}

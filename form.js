@@ -57,6 +57,11 @@
         body: JSON.stringify(data)
       })
         .then(function (r) {
+          if (r.status === 501) {
+            console.warn('[表单] 后端未配置通知方式：请在 Vercel 环境变量里设置 MAIL_WEBHOOK（企业微信/钉钉机器人）或 RESEND_API_KEY。');
+          } else if (r.status === 502) {
+            console.warn('[表单] 后端已配置，但通知发送失败，请检查 Webhook 地址或邮件服务额度。');
+          }
           if (!r.ok) throw new Error('HTTP ' + r.status);
           return r.json();
         })
