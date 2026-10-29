@@ -40,5 +40,23 @@
     "slug": "geo-kpi-metrics",
     "title": "GEO 的 KPI 怎么设：三个指标与四种数字游戏",
     "date": "2026-10-29"
+  },
+  {
+    "id": "geo03",
+    "slug": "geo-limits",
+    "title": "GEO 做不到什么：五个不该承诺的效果",
+    "date": "2026-10-29"
+  },
+  {
+    "id": "geo04",
+    "slug": "geo-keyword-content-distribution",
+    "title": "GEO 执行：关键词、内容与分发怎么做",
+    "date": "2026-10-29"
+  },
+  {
+    "id": "geo05",
+    "slug": "geo-first-90-days",
+    "title": "GEO 三个月能做什么，不能做什么",
+    "date": "2026-10-29"
   }
 ]

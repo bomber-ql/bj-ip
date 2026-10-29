@@ -125,8 +125,14 @@ def check(path: Path) -> dict:
     else:
         miss.append("没链到服务页")
 
+    # 排版检查（不计分）：只看可见正文，避免把 JSON-LD / 标签属性里的引号算进来
+    body_text = text
+    dq = body_text.count('"')
+    half_punct = len(re.findall(r"[\u4e00-\u9fa5][,;:!?](?!\d)", body_text))
+
     return {"file": path.name, "score": score, "chars": n, "miss": miss,
-            "h2": len(h2), "q": q_num, "tables": len(tables), "faq": faq_items}
+            "h2": len(h2), "q": q_num, "tables": len(tables), "faq": faq_items,
+            "dq": dq, "half": half_punct}
 
 
 def main():
@@ -166,6 +172,19 @@ def main():
         print(f"{DIM}{r['file']}{RST}")
         for m in r["miss"]:
             print(f"   {RED}·{RST} {m}")
+        print()
+
+    # 排版提醒：不影响分数，但会明显影响专业观感
+    typos = [r for r in rows if r["dq"] or r["half"]]
+    if typos:
+        print(f"{YEL}排版提醒{RST}（不扣分，建议修）")
+        for r in typos:
+            bits = []
+            if r["dq"]:
+                bits.append(f"半角引号 {r['dq']} 处")
+            if r["half"]:
+                bits.append(f"中文后半角标点 {r['half']} 处")
+            print(f"   {DIM}{r['file']}{RST}  " + " / ".join(bits))
         print()
 
     avg = sum(r["score"] for r in rows) / len(rows)
