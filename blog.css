@@ -194,7 +194,7 @@ main {
 .article-tag {
     display: inline-block;
     background: #e1ecf4;
-    color: #ffffff;
+    color: #2c4a63;
     padding: 2px 8px;
     border-radius: 10px;
     font-size: 12px;
@@ -370,5 +370,269 @@ body.article-page .back-link span {
     
     #article-content {
         padding: 20px;
+    }
+}
+/* ===== 静态文章页新增：面包屑 / 标题区 / 相关阅读 ===== */
+body.article-page .breadcrumb {
+    max-width: 800px;
+    margin: 100px auto 0;
+    padding: 0 40px;
+    font-size: 13px;
+    color: #888;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+body.article-page .breadcrumb a {
+    color: #666;
+    text-decoration: none;
+}
+
+body.article-page .breadcrumb a:hover {
+    color: #000;
+    text-decoration: underline;
+}
+
+body.article-page .breadcrumb span {
+    color: #bbb;
+}
+
+body.article-page .breadcrumb span:last-child {
+    color: #333;
+}
+
+.article-header h1 {
+    font-size: 2em;
+    line-height: 1.35;
+    font-weight: 700;
+    margin: 12px 0 16px;
+    color: #111;
+}
+
+.article-header .article-meta {
+    margin: 0 0 12px;
+    font-size: 14px;
+}
+
+#article-content .article-tags {
+    margin-bottom: 28px;
+}
+
+#article-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.related-posts {
+    max-width: 800px;
+    margin: 60px auto 0;
+    padding: 0 40px 20px;
+    box-sizing: border-box;
+    border-top: 1px solid #eee;
+}
+
+.related-posts h2 {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin: 28px 0 14px;
+    color: #111;
+}
+
+.related-posts ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.related-posts li {
+    padding: 10px 0;
+    border-bottom: 1px dashed #eee;
+}
+
+.related-posts a {
+    color: #222;
+    text-decoration: none;
+}
+
+.related-posts a:hover {
+    text-decoration: underline;
+}
+
+.article-footer-nav {
+    max-width: 800px;
+    margin: 32px auto 80px;
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    body.article-page .breadcrumb {
+        margin-top: 80px;
+        padding: 0 20px;
+    }
+    .article-header h1 {
+        font-size: 1.5em;
+    }
+    .related-posts,
+    .article-footer-nav {
+        padding: 0 20px;
+    }
+}
+
+/* 列表页引导段与浅色标签 */
+.page-intro {
+    max-width: 760px;
+    margin: 0 auto 32px;
+    padding: 0 20px;
+    font-size: 15px;
+    line-height: 1.9;
+    color: #555;
+    text-align: center;
+}
+
+.tag-plain {
+    display: inline-block;
+    font-size: 12px;
+    color: #777;
+    background: #f4f4f4;
+    border-radius: 10px;
+    padding: 2px 8px;
+    margin: 0 5px 5px 0;
+}
+
+#article-list .article-entry[hidden] {
+    display: none;
+}
+
+/* 正文排版（原来靠 JS 逐个加 margin，改成 CSS 保证不依赖 JS） */
+#article-content p {
+    margin: 0 0 18px;
+    font-size: 16px;
+    line-height: 1.9;
+    color: #333;
+}
+
+#article-content h2 {
+    margin: 40px 0 16px;
+    font-size: 1.35em;
+    font-weight: 600;
+    line-height: 1.5;
+    color: #111;
+}
+
+#article-content h3 {
+    margin: 28px 0 12px;
+    font-size: 1.12em;
+    font-weight: 600;
+    color: #222;
+}
+
+#article-content ul,
+#article-content ol {
+    margin: 0 0 20px;
+    padding-left: 1.4em;
+}
+
+#article-content li {
+    margin-bottom: 8px;
+    font-size: 16px;
+    line-height: 1.85;
+    color: #333;
+}
+
+#article-content blockquote {
+    margin: 24px 0;
+    padding: 16px 20px;
+    border-left: 3px solid #ddd;
+    background: #fafafa;
+    color: #555;
+}
+
+#article-content hr {
+    margin: 36px 0;
+    border: none;
+    border-top: 1px solid #eee;
+}
+
+#article-content > div[style*="text-align: center"] img {
+    border-radius: 8px;
+}
+
+/* 3D 背景放在列表下方时的间距 */
+.title-banner-bottom {
+    margin-top: 60px;
+    height: 320px;
+}
+
+@media (max-width: 768px) {
+    .title-banner-bottom {
+        margin-top: 40px;
+        height: 200px;
+    }
+}
+
+/* ===== 本文要点：可见的目录/摘要（人可跳转，机器可按节抽取） ===== */
+.key-points {
+    margin: 0 0 36px;
+    padding: 22px 26px 18px;
+    background: #fafafa;
+    border: 1px solid #eee;
+    border-radius: 12px;
+}
+
+.key-points .kp-title {
+    margin: 0 0 12px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: #888;
+}
+
+.key-points ol {
+    margin: 0;
+    padding-left: 1.2em;
+    counter-reset: kp;
+    list-style: none;
+}
+
+.key-points ol li {
+    position: relative;
+    margin: 0 0 8px;
+    padding-left: 22px;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.key-points ol li::before {
+    counter-increment: kp;
+    content: counter(kp, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 2px;
+    font-size: 11px;
+    color: #bbb;
+    letter-spacing: 0.05em;
+}
+
+.key-points a {
+    color: #222;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+}
+
+.key-points a:hover {
+    border-bottom-color: #bbb;
+}
+
+@media (max-width: 768px) {
+    .key-points {
+        padding: 18px 18px 14px;
+    }
+    .key-points ol li {
+        font-size: 14px;
     }
 }

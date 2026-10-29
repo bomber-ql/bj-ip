@@ -1,8 +1,57 @@
 {
-  "rewrites": [
+  "redirects": [
+    {
+      "source": "/article.html",
+      "has": [{ "type": "query", "key": "id", "value": "ip01" }],
+      "destination": "/insights/ip-creation-framework.html",
+      "permanent": true
+    },
+    {
+      "source": "/article.html",
+      "has": [{ "type": "query", "key": "id", "value": "article-miqvvmld-1osi" }],
+      "destination": "/insights/overseas-brand-global-media.html",
+      "permanent": true
+    },
+    {
+      "source": "/article.html",
+      "has": [{ "type": "query", "key": "id", "value": "article-mhqo73q0-csd8" }],
+      "destination": "/insights/digital-marketing-transformation.html",
+      "permanent": true
+    },
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/home", "destination": "/", "permanent": true }
+  ],
+  "headers": [
     {
       "source": "/(.*)",
-      "destination": "/404.html"
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    },
+    {
+      "source": "/",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/(.*).html",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/img/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=604800, s-maxage=2592000, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/(.*).(css|js)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800" }
+      ]
     }
   ]
 }

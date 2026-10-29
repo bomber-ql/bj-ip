@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - 怡亚科技</title>
-    <link rel="stylesheet" href="footer.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="blog.css">
-
-</head>
+    <title>404 页面未找到 - 怡亚科技</title>
+    <meta name="robots" content="noindex,follow">
+    <link rel="stylesheet" href="/footer.css">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/blog.css">
 <style>
         /* 仅针对404页面主体内容的样式 */
         .error-page {
@@ -113,11 +112,48 @@
                 box-sizing: border-box;
             }
         }
+
+        /* 覆盖 blog.css 里同名的 .error-message，避免粉色提示框串到 404 页 */
+        .error-page .error-message {
+            background: transparent;
+            border: none;
+            padding: 0;
+            color: #ffffff;
+        }
+        .error-page .primary-btn { background-color: #ffffff; color: #000000; }
+        .error-page .secondary-btn { color: #ffffff; border: 1px solid #ffffff; }
+        .error-page .error-number { color: rgba(255,255,255,0.9); }
     </style>
 </head>
 <body>
         <!-- 头部占位符 -->
-    <div id="header-placeholder"></div>
+    <div id="header-placeholder">
+<!-- header:auto -->
+<header>
+    <div class="header-container">
+        <div class="logo">
+            <a href="/" aria-label="怡亚科技首页">
+                <img src="/img/logo.svg" alt="怡亚科技 Logo - 专业营销技术解决方案提供商" width="120" height="40">
+            </a>
+        </div>
+        <div class="menu-button" id="menuButton" role="button" tabindex="0" aria-label="展开导航菜单" aria-expanded="false">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+        <nav id="mainNav" aria-label="主导航">
+            <ul>
+                <li><a href="/">主页</a></li>
+                <li><a href="/services/">服务</a></li>
+                <li><a href="/insights.html">全域智能洞察</a></li>
+                <li><a href="/vision.html">关于我们</a></li>
+                <li><a href="/contact.html">联系我们</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<!-- /header:auto -->
+</div>
 
     <div class="error-page">
         <div class="error-content">
@@ -134,43 +170,57 @@
         </div>
     </div>
      <!-- 脚部占位符 -->
-    <div id="footer-placeholder"></div>
-</body>
-<script>
-    // 封装加载HTML片段的函数
-    function loadComponent(url, elementId) {
-        return fetch(url)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('加载 ' + url + ' 失败');
-                }
-                return response.text();
-            })
-            .then(data => {
-                const element = document.getElementById(elementId);
-                if (element) {
-                    element.innerHTML = data;
-                } else {
-                    console.error('未找到ID为 "' + elementId + '" 的元素');
-                }
-            })
-            .catch(error => {
-                console.error('组件加载失败:', error);
-                const element = document.getElementById(elementId);
-                if (element) {
-                    element.innerHTML = `<p style="color:red; text-align:center;">加载 ${url} 时出错</p>`;
-                }
-            });
-    }
+    <div id="footer-placeholder">
+<!-- footer:auto -->
+<footer>
+            <div class="container">
+                <div class="footer-content">
+                    <!-- 公司信息区域 -->
+                    <div class="footer-section">
+                        <h3>怡亚科技</h3>
+                        <p>为您提供最前沿的营销解决方案</p>
+                        <p>推动品牌营销化创新</p>
+                        <div class="social-links">
+                            <a href="tel:+8618510501896" aria-label="电话咨询">
+                                <i class="fas fa-phone"></i>
+                            </a>
+                            <a href="mailto:yiyatech@bj-ip.com" aria-label="发送邮件">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="/contact.html" aria-label="联系我们">
+                                <i class="fas fa-location-dot"></i>
+                            </a>
+                        </div> 
+                    </div>
+                    
+                    <!-- 快速导航 -->
+                    <div class="footer-section">
+                        <h4>快速导航</h4>
+                        <ul class="footer-links">
+                    <li><a href="/">主页</a></li>
+                    <li><a href="/insights.html">全域智能洞察</a></li>
+                    <li><a href="/vision.html">关于我们</a></li>
+                    <li><a href="/contact.html">联系我们</a></li>
+                        </ul>
+                    </div>
 
-    // 页面加载完成后加载头部和脚部
-    document.addEventListener("DOMContentLoaded", function() {
-        // 并行加载头部和脚部
-        Promise.all([
-            loadComponent('header.html', 'header-placeholder'),
-            loadComponent('footer.html', 'footer-placeholder')
-        ]);
-    });
-</script>
- 
+                    <!-- 二维码区域 -->
+                    <div class="footer-section">
+                        <div class="qrcode-container">
+                            <div class="qrcode-item">
+                                <img src="/img/qr.jpg" alt="怡亚科技联系二维码" loading="lazy">
+                                <p>联系我们</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <p>&copy; 2025 怡亚科技 保留所有权利</p>
+                </div>
+            </div>
+        </footer>
+<!-- /footer:auto -->
+</div>
+</body>
 </html>
