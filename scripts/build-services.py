@@ -230,7 +230,7 @@ def footer_html() -> str:
     src = (ROOT / "footer.html").read_text(encoding="utf-8")
     m = re.search(r"<footer>.*?</footer>", src, re.S)
     out = m.group(0) if m else ""
-    return re.sub(r'(href|src)="(?!https?:|//|/|#|mailto:)([^"]+)"', r'\1="/\2"', out)
+    return re.sub(r'(href|src)="(?!https?:|//|/|#|mailto:|tel:)([^"]+)"', r'\1="/\2"', out)
 
 
 def head(title: str, desc: str, url: str, schema: dict, extra_css: str = "") -> str:

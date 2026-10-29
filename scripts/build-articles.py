@@ -188,7 +188,7 @@ def load_partial(name: str, prefix: str = "/") -> str:
         return ""
     out = m.group(0)
     if prefix == "/":
-        out = re.sub(r'(href|src)="(?!https?:|/|#|mailto:)([^"]+)"', r'\1="/\2"', out)
+        out = re.sub(r'(href|src)="(?!https?:|//|/|#|mailto:|tel:)([^"]+)"', r'\1="/\2"', out)
     return out
 
 
