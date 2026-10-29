@@ -197,6 +197,26 @@ def load_partial(name: str, prefix: str = "/") -> str:
     return out
 
 
+
+def faq_ld(content: str):
+    """把正文里的 .geo-faq 折叠块提取成 FAQPage 结构化数据。"""
+    pairs = re.findall(
+        r"<details[^>]*>\s*<summary[^>]*>(.*?)</summary>\s*<div class=\"faq-a\">(.*?)</div>",
+        content, re.S)
+    if len(pairs) < 3:
+        return None
+    clean = lambda x: re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", x)).strip()
+    return {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {"@type": "Question", "name": clean(q),
+             "acceptedAnswer": {"@type": "Answer", "text": clean(a)}}
+            for q, a in pairs
+        ],
+    }
+
+
 def render_points(content: str) -> str:
     pts = key_points(content)
     if len(pts) < 2:
@@ -211,6 +231,10 @@ def build_page(a: dict, content: str, slug: str, desc: str, cover: str, related:
     title = a["title"]
     date = a.get("date", "")
     author = a.get("author") or BRAND
+    _faq = faq_ld(content)
+    faq_block = (f'<script type="application/ld+json">{json.dumps(_faq, ensure_ascii=False)}</script>'
+                 if _faq else '')
+
     tags = [t for t in a.get("tags", []) if len(t) <= 12 and not t.startswith("一、")]
     ccls = {"数据洞察": "data-insight-tag", "品牌策略": "brand-strategy-tag", "品牌活动": "brand-activity-tag"}
     tag_html = "".join(
@@ -280,6 +304,7 @@ def build_page(a: dict, content: str, slug: str, desc: str, cover: str, related:
 <meta name="twitter:image" content="{cover}">
 <script type="application/ld+json">{json.dumps(article_ld, ensure_ascii=False)}</script>
 <script type="application/ld+json">{json.dumps(crumbs_ld, ensure_ascii=False)}</script>
+{faq_block}
 </head>
 <body class="article-page">
 <div id="header-placeholder">{load_partial("header.html")}</div>

@@ -649,3 +649,206 @@ body.article-page .breadcrumb span:last-child {
         font-size: 14px;
     }
 }
+
+/* ===== GEO 内容组件：一句话答案 / 对比表格 / FAQ ===== */
+
+/* 开篇结论：AI 最常摘取的一段 */
+.tldr {
+    margin: 0 0 32px;
+    padding: 22px 26px;
+    background: #f4f8ff;
+    border-left: 3px solid #2a6df4;
+    border-radius: 0 10px 10px 0;
+}
+
+#article-content .tldr p,
+.tldr p {
+    margin: 0;
+    font-size: 16.5px;
+    line-height: 1.9;
+    color: #1a2b47;
+}
+
+.tldr p + p {
+    margin-top: 10px;
+}
+
+/* 对比表格：手机上横向滚动，不挤压 */
+.geo-table-wrap {
+    margin: 28px 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid #e8e8e8;
+    border-radius: 10px;
+}
+
+table.geo-table {
+    width: 100%;
+    min-width: 520px;
+    border-collapse: collapse;
+    font-size: 14.5px;
+    line-height: 1.7;
+    background: #fff;
+}
+
+table.geo-table thead th {
+    padding: 13px 16px;
+    text-align: left;
+    font-weight: 600;
+    color: #111;
+    background: #f7f7f5;
+    border-bottom: 1px solid #e8e8e8;
+    white-space: nowrap;
+}
+
+table.geo-table td {
+    padding: 13px 16px;
+    color: #444;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: top;
+}
+
+table.geo-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+table.geo-table td:first-child {
+    color: #111;
+    font-weight: 500;
+}
+
+/* FAQ */
+.geo-faq {
+    margin: 36px 0 8px;
+    border-top: 1px solid #eee;
+}
+
+.geo-faq > h2 {
+    margin-top: 32px;
+}
+
+.geo-faq details {
+    border-bottom: 1px solid #eee;
+}
+
+.geo-faq summary {
+    padding: 18px 30px 18px 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: #111;
+    cursor: pointer;
+    position: relative;
+    list-style: none;
+    line-height: 1.6;
+}
+
+.geo-faq summary::-webkit-details-marker {
+    display: none;
+}
+
+.geo-faq summary::after {
+    content: "+";
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    font-weight: 300;
+    color: #999;
+    transition: transform 0.2s ease;
+}
+
+.geo-faq details[open] summary::after {
+    content: "−";
+}
+
+.geo-faq .faq-a {
+    padding: 0 30px 20px 0;
+    font-size: 15px;
+    line-height: 1.9;
+    color: #555;
+}
+
+@media (max-width: 768px) {
+    .tldr {
+        padding: 18px 18px;
+        margin-bottom: 26px;
+    }
+    .tldr p {
+        font-size: 15.5px;
+        line-height: 1.85;
+    }
+    table.geo-table {
+        font-size: 13.5px;
+        min-width: 480px;
+    }
+    table.geo-table thead th,
+    table.geo-table td {
+        padding: 11px 13px;
+    }
+    .geo-faq summary {
+        font-size: 15px;
+        padding: 16px 26px 16px 0;
+    }
+    .geo-faq .faq-a {
+        font-size: 14.5px;
+    }
+}
+
+/* ===== 品牌观点块：软文的"声音"，也是 AI 引用时带品牌的一次机会 ===== */
+.brand-view {
+    position: relative;
+    margin: 44px 0;
+    padding: 36px 40px 30px;
+    background: #101010;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.brand-view::before {
+    content: "“";
+    position: absolute;
+    top: -6px;
+    left: 18px;
+    font-size: 88px;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.09);
+    font-family: Georgia, serif;
+}
+
+#article-content .brand-view p,
+.brand-view p {
+    position: relative;
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.95;
+    color: #efefef;
+    letter-spacing: 0.01em;
+}
+
+.brand-view .attr {
+    display: block;
+    margin-top: 20px;
+    font-size: 12.5px;
+    color: #7d7d7d;
+    letter-spacing: 0.06em;
+    position: relative;
+}
+
+@media (max-width: 768px) {
+    .brand-view {
+        margin: 32px 0;
+        padding: 26px 22px 22px;
+        border-radius: 12px;
+    }
+    #article-content .brand-view p,
+    .brand-view p {
+        font-size: 15.5px;
+        line-height: 1.9;
+        color: #efefef;
+    }
+    .brand-view::before {
+        font-size: 64px;
+        left: 12px;
+    }
+}
