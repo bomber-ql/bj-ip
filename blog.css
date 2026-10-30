@@ -784,9 +784,14 @@ table.geo-table td:first-child {
         font-size: 13.5px;
         min-width: 480px;
     }
-    /* 手机端表格必然溢出，用右侧内阴影暗示「还能滑动」，否则看着像被切断了 */
+    /* 手机端表格必然溢出，用右侧渐变暗示「还能滑动」。
+       内阴影会被表格白底盖住，所以画在父级背景上，表格转透明。 */
     .geo-table-wrap {
-        box-shadow: inset -12px 0 12px -7px rgba(0, 0, 0, 0.3);
+        background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.13))
+                    right center / 24px 100% no-repeat scroll;
+    }
+    table.geo-table {
+        background: transparent;
     }
     table.geo-table thead th,
     table.geo-table td {

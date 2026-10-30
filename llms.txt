@@ -17,7 +17,8 @@
 - **品牌策略**：品牌命名、品牌定位、品牌愿景、品牌形象、品牌 IP 设计、包装设计、LOGO 设计、VI 设计、文创设计
 - **数据洞察**：数据监测、用户画像、行为分析、效果评估、A/B 测试、ROI 分析、竞品分析、趋势预测
 - **品牌活动**：社群运营、内容策划、KOL 合作、用户互动、活动策划、口碑营销、社群管理、用户增长、活动搭建
-- **全域营销体验**：AI / AR/VR / CG 技术驱动的沉浸式营销场景
+- **全域营销体验**：AR 扫码互动、数字展厅与互动装置、CG 三维内容
+- **数字人与 AI 内容**：数字人形象与数字分身、虚拟人直播与口播、AIGC 批量生产、内容生产流程搭建
 - **新媒体运营**：账号代运营、内容生产、投放策略
 
 ## 核心团队与方法
@@ -29,11 +30,12 @@
 ## 主要页面
 
 - [首页](https://www.bj-ip.com/)：公司与服务总览
-- [服务总览](https://www.bj-ip.com/services/)：四项服务的合作方式与边界
+- [服务总览](https://www.bj-ip.com/services/)：五项服务的合作方式、选型自查与供应商判断
 - [品牌策略与品牌设计](https://www.bj-ip.com/services/brand-strategy.html)：命名、定位、VI、包装、品牌 IP
 - [品牌活动与线下体验](https://www.bj-ip.com/services/brand-activation.html)：快闪、发布会、展会、小会沙龙
 - [内容与新媒体运营](https://www.bj-ip.com/services/content-operation.html)：账号定位、选题库、KOL、投放
-- [AI · AR/VR · CG 营销体验](https://www.bj-ip.com/services/immersive-experience.html)：AR 互动、数字展厅、虚拟人、三维内容
+- [AR 互动与数字展厅](https://www.bj-ip.com/services/immersive-experience.html)：AR 扫码互动、数字展厅、互动装置、三维内容
+- [数字人与 AI 内容生产](https://www.bj-ip.com/services/digital-human.html)：数字人形象、虚拟人直播、AIGC 批量生产
 - [全域智能洞察](https://www.bj-ip.com/insights.html)：营销方法论与行业观点
 - [关于我们](https://www.bj-ip.com/vision.html)：团队、愿景与价值观
 - [联系我们](https://www.bj-ip.com/contact.html)：联系方式与地址

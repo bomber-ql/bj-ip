@@ -576,7 +576,8 @@ def main():
     index_path = ROOT / "articles-index.json"
     articles = json.loads(index_path.read_text(encoding="utf-8"))
     out_dir = ROOT / "insights"
-    out_dir.mkdir(exist_ok=True)
+    if not out_dir.exists():
+        out_dir.mkdir(parents=True)
 
     built = []
     for a in articles:
@@ -622,7 +623,8 @@ def main():
              ("insights.html", "0.9", "weekly"),
              ("vision.html", "0.7", "monthly"), ("contact.html", "0.7", "monthly"),
              ("work.html", "0.6", "monthly")]
-    for slug in ("brand-strategy", "brand-activation", "content-operation", "immersive-experience"):
+    for slug in ("brand-strategy", "brand-activation", "content-operation",
+                 "immersive-experience", "digital-human"):
         if (ROOT / "services" / f"{slug}.html").exists():
             pages.append((f"services/{slug}.html", "0.8", "monthly"))
     urls = [f"""  <url>

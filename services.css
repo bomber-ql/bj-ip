@@ -257,6 +257,19 @@
     margin: 32px 0 40px;
 }
 
+/* 五项服务是奇数，最后一张铺满一行 */
+.service-cards > a:last-child:nth-child(odd) {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    column-gap: 56px;
+    align-items: start;
+}
+
+.service-cards > a:last-child:nth-child(odd) p {
+    margin: 0;
+}
+
 .service-cards a {
     display: block;
     padding: 26px 24px;
@@ -284,18 +297,229 @@
     color: #666;
 }
 
+/* ── 一句话答案：AI 引擎最常引用的那一段 ── */
+.service-page .tldr {
+    margin: 8px 0 32px;
+    padding: 22px 26px;
+    background: #f4f8ff;
+    border-left: 3px solid #2a6df4;
+    border-radius: 0 10px 10px 0;
+}
+
+.service-page .tldr p {
+    margin: 0;
+    font-size: 16.5px;
+    line-height: 1.9;
+    color: #1a2b47;
+}
+
+/* ── 本文要点：人用来跳转，机器用来切小节 ── */
+.service-page .toc {
+    margin: 0 0 40px;
+    padding: 18px 22px;
+    background: #fafafa;
+    border: 1px solid #eee;
+    border-radius: 10px;
+}
+
+.service-page .toc .toc-title {
+    margin: 0 0 10px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #999;
+}
+
+.service-page .toc ol {
+    margin: 0;
+    padding-left: 20px;
+    columns: 2;
+    column-gap: 28px;
+}
+
+.service-page .toc li {
+    font-size: 14px;
+    line-height: 1.9;
+    color: #444;
+    margin: 0;
+    padding: 0;
+}
+
+.service-page .toc li::before {
+    display: none;
+}
+
+.service-page .toc a {
+    color: #333;
+    text-decoration: none;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.service-page .toc a:hover {
+    color: #000;
+    border-color: #000;
+}
+
+/* ── 表格：手机上横滑，靠右侧内阴影暗示还有内容 ── */
+.geo-table-wrap {
+    margin: 28px 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid #e8e8e8;
+    border-radius: 10px;
+}
+
+table.geo-table {
+    width: 100%;
+    min-width: 520px;
+    border-collapse: collapse;
+    font-size: 14.5px;
+    line-height: 1.7;
+    background: #fff;
+}
+
+table.geo-table thead th {
+    padding: 13px 16px;
+    text-align: left;
+    font-weight: 600;
+    color: #111;
+    background: #f7f7f5;
+    border-bottom: 1px solid #e8e8e8;
+    white-space: nowrap;
+}
+
+table.geo-table td {
+    padding: 13px 16px;
+    color: #444;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: top;
+}
+
+table.geo-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+table.geo-table td:first-child {
+    color: #111;
+    font-weight: 500;
+    min-width: 6.5em;
+}
+
+/* 表格下方的小字说明与出处 */
+.service-page .note {
+    margin: -14px 0 32px;
+    font-size: 13px;
+    line-height: 1.75;
+    color: #888;
+}
+
+/* ── 品牌观点：黑底，带署名 ── */
+.service-page .brand-view {
+    position: relative;
+    margin: 52px 0;
+    padding: 36px 40px 30px;
+    background: #101010;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.service-page .brand-view::before {
+    content: "\201C";
+    position: absolute;
+    top: -6px;
+    left: 18px;
+    font-size: 88px;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.09);
+    font-family: Georgia, serif;
+}
+
+.service-page .brand-view p {
+    position: relative;
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.95;
+    color: #efefef;
+    letter-spacing: 0.01em;
+}
+
+.service-page .brand-view p + p {
+    margin-top: 14px;
+}
+
+.service-page .brand-view .attr {
+    display: block;
+    margin-top: 20px;
+    font-size: 12.5px;
+    color: #7d7d7d;
+    letter-spacing: 0.06em;
+    position: relative;
+}
+
+/* 两个服务页的交付清单是三块，不是四块 */
+.service-page .deliver.three {
+    grid-template-columns: repeat(3, 1fr);
+}
+
 @media (max-width: 768px) {
     .service-page h1 {
         font-size: 1.6rem;
     }
     .service-page .deliver,
+    .service-page .deliver.three,
     .service-cards {
         grid-template-columns: 1fr;
+    }
+    .service-cards > a:last-child:nth-child(odd) {
+        grid-column: span 1;
+        display: block;
     }
     .service-page .steps {
         grid-template-columns: repeat(2, 1fr);
     }
     .service-page .cta {
         padding: 28px 22px;
+    }
+    .service-page .toc ol {
+        columns: 1;
+    }
+    .service-page .tldr {
+        padding: 18px 18px;
+        margin-bottom: 26px;
+    }
+    .service-page .tldr p {
+        font-size: 15.5px;
+        line-height: 1.85;
+    }
+    .service-page .brand-view {
+        margin: 34px 0;
+        padding: 26px 22px 22px;
+        border-radius: 12px;
+    }
+    .service-page .brand-view p {
+        font-size: 15.5px;
+        line-height: 1.85;
+    }
+    table.geo-table {
+        font-size: 13.5px;
+        min-width: 480px;
+    }
+    /* 首列 6 个字以内不折行，再长就换行 */
+    table.geo-table td:first-child {
+        min-width: 6.5em;
+    }
+    /* 右侧渐变提示可横滑。表格是白底，会盖住父级的 inset 阴影，
+       所以把提示画在父级背景上（scroll 附着，钉在可视右缘），表格转透明。 */
+    .geo-table-wrap {
+        background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.13))
+                    right center / 24px 100% no-repeat scroll;
+    }
+    table.geo-table {
+        background: transparent;
+    }
+    table.geo-table thead th,
+    table.geo-table td {
+        padding: 11px 13px;
     }
 }

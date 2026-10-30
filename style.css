@@ -1095,6 +1095,36 @@ nav ul li a.active::after {
   gap: 20px;
 }
 
+/* 五项服务是奇数，最后一张铺满一行并改成左右两栏，避免右边空一大块 */
+.svc-cards > .svc-card:last-child:nth-child(odd) {
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  grid-template-areas:
+    "idx idx"
+    "title desc"
+    "go desc";
+  column-gap: 56px;
+  align-items: start;
+}
+
+.svc-cards > .svc-card:last-child:nth-child(odd) .svc-idx {
+  grid-area: idx;
+}
+
+.svc-cards > .svc-card:last-child:nth-child(odd) h3 {
+  grid-area: title;
+}
+
+.svc-cards > .svc-card:last-child:nth-child(odd) p {
+  grid-area: desc;
+}
+
+.svc-cards > .svc-card:last-child:nth-child(odd) .svc-go {
+  grid-area: go;
+  justify-self: start;
+}
+
 .svc-card {
   display: flex;
   flex-direction: column;
@@ -1217,6 +1247,10 @@ nav ul li a.active::after {
   .svc-cards {
     grid-template-columns: 1fr;
     gap: 14px;
+  }
+  .svc-cards > .svc-card:last-child:nth-child(odd) {
+    grid-column: span 1;
+    display: block;
   }
   .svc-card {
     padding: 26px 24px 22px;
